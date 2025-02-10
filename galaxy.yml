@@ -1,6 +1,6 @@
 namespace: nsls2
 name: ioc_deploy
-version: 0.0.1
+version: 1.0.0
 readme: README.md
 authors:
   - your name <example@domain.com>
@@ -8,9 +8,10 @@ description: your collection description
 license:
   - BSD-3-Clause
 license_file: "LICENSE"
-tags: []
+tags: [infrastructure]
 dependencies: {}
 repository: http://github.com/nsls2/nsls2.ioc_deploy
 documentation: http://github.com/nsls2/nsls2.ioc_deploy
+homepage: http://www.bnl.gov/nsls2
 issues: https://github.com/NSLS2/nsls2.ioc_deploy/issues
 build_ignore: []
