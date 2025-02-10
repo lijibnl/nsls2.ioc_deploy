@@ -7,7 +7,7 @@ authors:
 description: your collection description
 license:
   - BSD-3-Clause
-license_file: 'LICENSE'
+license_file: "LICENSE"
 tags: []
 dependencies: {}
 repository: http://github.com/nsls2/nsls2.ioc_deploy
