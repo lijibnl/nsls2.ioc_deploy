@@ -15,7 +15,7 @@ repos:
         files: \.(yaml|yml)$
         name: ansible lint
         language: system
-        entry: ansible-lint -c .ansible-lint
+        entry: ansible-lint -c .ansible-lint --offline
         types: [yaml]
         description: Perform ansible linting
 

@@ -8,5 +8,6 @@
 
 - name: Remove IOC service file
   ansible.builtin.file:
-    path: "/etc/systemd/system/softioc-{{ manage_iocs_target_ioc_name }}.service"
+    path:
+      "/etc/systemd/system/softioc-{{ manage_iocs_ioc_name }}.service"
     state: absent
