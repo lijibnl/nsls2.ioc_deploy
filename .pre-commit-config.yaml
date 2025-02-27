@@ -9,19 +9,19 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
 
-  - repo: https://github.com/ansible/ansible-lint.git
-    rev: v6.22.2
+  - repo: local
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
         name: ansible lint
-        description: Run configurations on .ansible-lint file
-        verbose: false
+        language: system
+        entry: ansible-lint -c .ansible-lint
+        types: [yaml]
+        description: Perform ansible linting
 
-  - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.29.0
-    hooks:
       - id: yamllint
         name: yaml lint
-        description: This hook will run yamllint with the default configuration
-        args: [--strict]
+        language: system
+        entry: yamllint --strict -c .github/linters/.yaml-lint.yml
+        description: YamlLint with same config as super-linter
+        types: [yaml]
