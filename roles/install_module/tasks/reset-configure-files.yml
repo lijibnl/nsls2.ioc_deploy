@@ -1,0 +1,69 @@
+---
+
+- name: Find all existing RELEASE* files
+  ansible.builtin.find:
+    file_type: "any"
+    paths: "{{ item.path }}"
+    patterns:
+      - "RELEASE*"
+      - "RELEASE"
+    use_regex: true
+  register: install_module_release_files
+
+- name: Print list of existing RELEASE files
+  ansible.builtin.debug:
+    msg: "{{ install_module_release_file['path'] }}"
+  loop: "{{ install_module_release_files['files'] }}"
+  loop_control:
+    loop_var: install_module_release_file
+
+- name: Remove any unused RELEASE files
+  ansible.builtin.file:
+    path: "{{ install_module_release_file['path'] }}"
+    state: "absent"
+  loop: "{{ install_module_release_files['files'] }}"
+  loop_control:
+    loop_var: install_module_release_file
+
+- name: Create general RELEASE file
+  ansible.builtin.template:
+    src: "templates/RELEASE.j2"
+    dest: "{{ item.path }}/RELEASE"
+    owner: "{{ host_info_softioc_user }}"
+    group: "{{ host_info_softioc_group }}"
+    mode: "0664"
+
+- name: If config overridden, find and remove CONFIG_SITE files
+  block:
+    - name: Find all existing CONFIG_SITE* files
+      ansible.builtin.find:
+        file_type: "any"
+        paths: "{{ item.path }}"
+        patterns:
+          - "CONFIG_SITE*"
+          - "CONFIG_SITE"
+        use_regex: true
+      register: install_module_config_site_files
+
+    - name: Print list of existing CONFIG_SITE files
+      ansible.builtin.debug:
+        msg: "{{ install_module_config_site_file['path'] }}"
+      loop: "{{ install_module_config_site_files['files'] }}"
+      loop_control:
+        loop_var: install_module_config_site_file
+
+    - name: Remove any unused CONFIG_SITE files
+      ansible.builtin.file:
+        path: "{{ install_module_config_site_file['path'] }}"
+        state: "absent"
+      loop: "{{ install_module_config_site_files['files'] }}"
+      loop_control:
+        loop_var: install_module_config_site_file
+
+    - name: Create general CONFIG_SITE file
+      ansible.builtin.template:
+        src: "templates/CONFIG_SITE.j2"
+        dest: "{{ item.path }}/CONFIG_SITE"
+        owner: "{{ host_info_softioc_user }}"
+        group: "{{ host_info_softioc_group }}"
+        mode: "0664"

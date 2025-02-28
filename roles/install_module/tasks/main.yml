@@ -1,0 +1,12 @@
+---
+
+- name: Fetch host information
+  ansible.builtin.include_role:
+    name: nsls2.ioc_deploy.host_info
+
+- name: Create top level list to track installed modules
+  ansible.builtin.set_fact:
+    install_module_installed: "{{ [] }}"
+
+- name: Install modules
+  ansible.builtin.include_tasks: install-module.yml

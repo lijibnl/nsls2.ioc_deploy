@@ -1,0 +1,18 @@
+---
+
+pmac_2_6_2:
+  name: "pmac_2_6_2"
+  url: "https://github.com/dls-controls/pmac"
+  version: "2-6-2"
+  epics_deps:
+    EPICS_BASE: "/usr/lib/epics"
+    ASYN: "/usr/lib/epics"
+    CALC: "/usr/lib/epics"
+    MOTOR: "/usr/lib/epics"
+    BUSY: "/usr/lib/epics"
+  pkg_deps:
+    - epics-bundle
+    - libssh2-devel
+  # See https://github.com/DiamondLightSource/pmac/pull/131
+  # on why -j flag must be avoided for now.
+  compilation_command: "make"

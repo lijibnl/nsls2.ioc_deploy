@@ -2,7 +2,7 @@
 
 - name: Fail if host configuration has not been loaded
   ansible.builtin.fail:
-    msg: "Host configuration must be loaded before deploying common files"
+    msg: "Host configuration must be loaded from repo before extracting info"
   when: host_config is not defined
 
 - name: Set hostname without domain
