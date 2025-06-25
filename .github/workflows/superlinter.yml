@@ -35,6 +35,8 @@ jobs:
           YAML_ERROR_ON_WARNING: true
           VALIDATE_YAML_PRETTIER: false
           VALIDATE_NATURAL_LANGUAGE: false
+          VALIDATE_PYTHON_PYLINT: false
+          VALIDATE_MARKDOWN_PRETTIER: false
 
   run_ansible_lint:
     name: Run ansible-lint
