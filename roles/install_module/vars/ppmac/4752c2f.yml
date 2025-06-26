@@ -1,0 +1,12 @@
+---
+
+ppmac_4752c2f:
+  name: ppmac_4752c2f
+  url: https://github.com/NSLS-II/ppmac
+  version: main
+  epics_deps:
+    EPICS_BASE: /usr/lib/epics
+  pkg_deps:
+    - epics-bundle
+  module_deps:
+    - pmac_2_6_2

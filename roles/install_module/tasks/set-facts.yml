@@ -1,0 +1,68 @@
+---
+
+- name: Include vars file for module with given version
+  ansible.builtin.include_vars:
+    "{{ module_name.split('_')[0] }}/{{ module_name.split('_', 1)[-1] }}.yml"
+
+- name: Retrieve module configuration
+  ansible.builtin.set_fact:
+    install_module_config: "{{ lookup('vars', module_name) }}"
+
+- name: Install dependency modules recursively if needed.
+  ansible.builtin.include_tasks: install-module.yml
+  loop: "{{ install_module_config.module_deps }}"
+  loop_control:
+    loop_var: module_name
+  when: >-
+    install_module_config.module_deps is defined and
+    module_name not in install_module_installed
+
+- name: Show already installed modules
+  ansible.builtin.debug:
+    msg: "{{ install_module_installed }}"
+
+# Need this because the recursive loop seems to overwrite this var.
+- name: Reload top level module configuration
+  ansible.builtin.set_fact:
+    install_module_config: "{{ lookup('vars', module_name) }}"
+
+- name: Set module install directory
+  ansible.builtin.set_fact:
+    install_module_dir: "{{ install_module_install_dir }}/{{ module_name }}"
+
+- name: Set baseline default epics deps
+  ansible.builtin.set_fact:
+    install_module_epics_deps: "{{ install_module_default_epics_deps }}"
+
+- name: If specified, add any module specific epics dep overrides
+  ansible.builtin.set_fact:
+    install_module_epics_deps:
+      "{{ install_module_config.epics_deps
+      | combine(install_module_epics_deps) }}"
+  when: install_module_config.epics_deps is defined
+
+- name: Add any already installed modules as epics deps, chopping off version
+  ansible.builtin.set_fact:
+    install_module_epics_deps: >-
+      "{{ install_module_epics_deps
+      | combine({item.split('_')[0] | upper:
+          install_module_install_dir + '/' + item})
+      }}"
+  loop: "{{ install_module_installed }}"
+
+- name: Add module itself to epics deps
+  ansible.builtin.set_fact:
+    install_module_epics_deps:
+      "{{ install_module_epics_deps
+      | combine({module_name.split('_')[0] | upper:
+            install_module_install_dir + '/' + module_name})
+      }}"
+
+- name: List merged epics dependency list
+  ansible.builtin.debug:
+    msg: "{{ install_module_epics_deps }}"
+
+- name: Override compilation command if needed
+  ansible.builtin.set_fact:
+    compilation_command: "{{ install_module_config.compilation_command }}"
+  when: install_module_config.compilation_command is defined

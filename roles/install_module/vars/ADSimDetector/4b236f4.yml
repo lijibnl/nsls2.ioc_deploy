@@ -1,0 +1,23 @@
+---
+
+ADSimDetector_4b236f4:
+  name: ADSimDetector_4b236f4
+  url: https://github.com/areaDetector/ADSimDetector
+  # Use commit hash as version. R2-11 requires newest asyn,
+  # R2-10 breaks with newer ADCore
+  version: 4b236f4
+  epics_deps:
+    EPICS_BASE: /usr/lib/epics
+    ASYN: /usr/lib/epics
+    AUTOSAVE: /usr/lib/epics
+    BUSY: /usr/lib/epics
+    CALC: /usr/lib/epics
+    DEVIOCSTATS: /usr/lib/epics
+    SSCAN: /usr/lib/epics
+    SNCSEQ: /usr/lib/epics
+    RECCASTER: /usr/lib/epics
+  pkg_deps:
+    - epics-bundle
+  include_base_ad_config: true
+  module_deps:
+    - ADCore_R3_13
