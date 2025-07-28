@@ -17,7 +17,7 @@
     mode: "0775"
 
 - name: Handle standard module
-  when: not module_name.startswith("epics-base")
+  when: not module_name.startswith("epics_base")
   block:
 
     - name: Check if module has already been cloned
@@ -103,7 +103,7 @@
     version: "{{ install_module_config.version }}"
     force: "{{ install_module_force_reinstall }}"
     recursive: true
-  when: module_name.startswith("epics-base")
+  when: module_name.startswith("epics_base")
 
 - name: Install any required system packages
   ansible.builtin.dnf:

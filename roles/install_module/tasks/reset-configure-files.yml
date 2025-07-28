@@ -17,18 +17,18 @@
   loop_control:
     loop_var: install_module_release_file
 
-- name: Remove any unused RELEASE files
-  ansible.builtin.file:
-    path: "{{ install_module_release_file['path'] }}"
-    state: "absent"
-  loop: "{{ install_module_release_files['files'] }}"
-  loop_control:
-    loop_var: install_module_release_file
+# - name: Remove any unused RELEASE files
+#   ansible.builtin.file:
+#     path: "{{ install_module_release_file['path'] }}"
+#     state: "absent"
+#   loop: "{{ install_module_release_files['files'] }}"
+#   loop_control:
+#     loop_var: install_module_release_file
 
-- name: Create general RELEASE file
+- name: Create general RELEASE.local file
   ansible.builtin.template:
     src: "templates/RELEASE.j2"
-    dest: "{{ item.path }}/RELEASE"
+    dest: "{{ item.path }}/RELEASE.local"
     owner: "{{ host_info_softioc_user }}"
     group: "{{ host_info_softioc_group }}"
     mode: "0664"
@@ -52,18 +52,18 @@
       loop_control:
         loop_var: install_module_config_site_file
 
-    - name: Remove any unused CONFIG_SITE files
-      ansible.builtin.file:
-        path: "{{ install_module_config_site_file['path'] }}"
-        state: "absent"
-      loop: "{{ install_module_config_site_files['files'] }}"
-      loop_control:
-        loop_var: install_module_config_site_file
+    # - name: Remove any unused CONFIG_SITE files
+    #   ansible.builtin.file:
+    #     path: "{{ install_module_config_site_file['path'] }}"
+    #     state: "absent"
+    #   loop: "{{ install_module_config_site_files['files'] }}"
+    #   loop_control:
+    #     loop_var: install_module_config_site_file
 
-    - name: Create general CONFIG_SITE file
+    - name: Create general CONFIG_SITE.local file
       ansible.builtin.template:
         src: "templates/CONFIG_SITE.j2"
-        dest: "{{ item.path }}/CONFIG_SITE"
+        dest: "{{ item.path }}/CONFIG_SITE.local"
         owner: "{{ host_info_softioc_user }}"
         group: "{{ host_info_softioc_group }}"
         mode: "0664"

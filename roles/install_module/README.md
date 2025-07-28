@@ -18,15 +18,17 @@ Finally, the specified compilation command (default is just `make -sj`) is ran t
 
 ## Adding a module
 
-If the module already has a directory under `vars`, you may simply add an additional `.yml` file for the new version. A configuration must be structured as follows:
+To add a module to `install_module`, a single `.yml` file must be written and placed in the `vars` directory that describes the git repository it should be pulled from, the version, the dependencies, and if needed a custom compilation command. If a dependency is not provided by the `epics-bundle`, or it is not already available, it will also need to be added.
+
+The file should be named in the format of the name of the module (without underscores), followed by an underscore, and then the version. Alternatively, just the module name can be used to represent "most recent version". The format of the file itself is as follows:
 
 ```Yaml
 # Top level dictionary key must be {module_name}_{module_version}
 # module_version here must be the same as the config file name
-ADVimba_R1_5:
+advimba_R1_5:
 
   # Same as the top level dictionary name (may be removed)
-  name: ADVimba_R1_5
+  name: advimba_R1_5
 
   # Public git URL from which to download module
   url: https://github.com/areaDetector/ADVimba
@@ -62,7 +64,7 @@ ADVimba_R1_5:
   # List any additional modules that should be built by the role by name.
   # Only need to specify the immediate parent dependency.
   module_deps:
-  - ADGenICam_R1_10
+  - adgenicam_R1_10
 
   # If the command needed to compile the module is anything but a make in the
   # top directory, override that here. If just make, then this key can be omitted.
@@ -70,28 +72,8 @@ ADVimba_R1_5:
 
 ```
 
-If a module does not yet have a directory, simply add one with the module name, and add a version config file in the above format.
+If the version tag has `-`es, you'll need to replace them with `_` characters instead, since using `-` characters in yaml key names is not permitted.
 
-The name of the file should represent the version number. If the version has `-`es, you'll need to replace them with `_` characters instead.
+## Testing your configuration
 
-After you've added your config file, run `make` in this directory to regenerate the below supported versions table.
-
-## Currently supported modules
-
-<!-- BEGIN_AUTOGEN -->
-
-Module | Version | Url
---- | --- | ---
-ADAravis | R2-3 | [ADAravis_R2_3](https://github.com/areaDetector/ADAravis/tree/R2_3)
-ADCore | R3-12-1 | [ADCore_R3_12_1](https://github.com/areaDetector/ADCore/tree/R3_12_1)
-ADCore | R3-13 | [ADCore_R3_13](https://github.com/areaDetector/ADCore/tree/R3_13)
-ADEiger | R3-4 | [ADEiger_R3_4](https://github.com/areadetector/ADEiger/tree/R3_4)
-ADGenICam | R1-10 | [ADGenICam_R1_10](https://github.com/areaDetector/ADGenICam/tree/R1_10)
-ADKinetix | R1-2 | [ADKinetix_R1_2](https://github.com/NSLS-II/ADKinetix/tree/R1_2)
-ADMerlin | R4-1 | [ADMerlin_R4_1](https://github.com/areadetector/ADMerlin/tree/R4_1)
-ADSimDetector | 4b236f4 | [ADSimDetector_4b236f4](https://github.com/areaDetector/ADSimDetector/tree/4b236f4)
-ADSupport | R1-10 | [ADSupport_R1_10](https://github.com/areaDetector/ADSupport/tree/R1_10)
-ADVimba | R1-5 | [ADVimba_R1_5](https://github.com/areaDetector/ADVimba/tree/R1_5)
-motorSim | R1-2 | [motorSim_R1_2](https://github.com/epics-motor/motorMotorSim/tree/R1_2)
-pmac | 2-6-2 | [pmac_2_6_2](https://github.com/dls-controls/pmac/tree/2_6_2)
-ppmac | main | [ppmac_4752c2f](https://github.com/NSLS-II/ppmac/tree/4752c2f)
+TODO

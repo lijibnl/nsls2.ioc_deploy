@@ -1,9 +1,11 @@
 ---
 
-ADVimba_R1_5:
-  name: ADVimba_R1_5
-  url: https://github.com/areaDetector/ADVimba
-  version: R1-5
+adsimdetector_4b236f4:
+  name: adsimdetector_4b236f4
+  url: https://github.com/areaDetector/ADSimDetector
+  # Use commit hash as version. R2-11 requires newest asyn,
+  # R2-10 breaks with newer ADCore
+  version: 4b236f4
   epics_deps:
     EPICS_BASE: /usr/lib/epics
     ASYN: /usr/lib/epics
@@ -18,4 +20,4 @@ ADVimba_R1_5:
     - epics-bundle
   include_base_ad_config: true
   module_deps:
-    - ADGenICam_R1_10
+    - adcore_R3_13

@@ -9,4 +9,4 @@ ppmac_4752c2f:
   pkg_deps:
     - epics-bundle
   module_deps:
-    - pmac_2_6_2
+    - pmac_2_6_5

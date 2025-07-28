@@ -1,12 +1,12 @@
 ---
 
-ADCore_R3_12_1:
-  name: ADCore_R3_12_1
+adcore_R3_13:
+  name: adcore_R3_13
   url: https://github.com/areaDetector/ADCore
   include_base_ad_config: true
-  version: R3-12-1
+  version: R3-13
   module_deps:
-    - ADSupport_R1_10
+    - adsupport_R1_10
   pkg_deps:
     - epics-bundle
   epics_deps:

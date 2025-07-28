@@ -1,14 +1,12 @@
 ---
 
-ADCore_R3_13:
-  name: ADCore_R3_13
-  url: https://github.com/areaDetector/ADCore
+adkinetix_R1_3:
+  name: adkinetix_R1_3
+  url: https://github.com/NSLS-II/ADKinetix
   include_base_ad_config: true
-  version: R3-13
+  version: R1-3
   module_deps:
-    - ADSupport_R1_10
-  pkg_deps:
-    - epics-bundle
+    - adcore_R3_13
   epics_deps:
     EPICS_BASE: /usr/lib/epics
     ASYN: /usr/lib/epics
@@ -19,3 +17,5 @@ ADCore_R3_13:
     SSCAN: /usr/lib/epics
     SNCSEQ: /usr/lib/epics
     RECCASTER: /usr/lib/epics
+  pkg_deps:
+    - epics-bundle
