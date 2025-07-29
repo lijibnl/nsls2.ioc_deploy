@@ -18,10 +18,11 @@ repos:
         # .ansible-lint file, so we pass them explicitly as an argument here
         entry: ansible-lint --offline --exclude roles/install_module/vars/*
         description: Perform ansible linting
+        types: [yaml]
 
       - id: yamllint
         name: yaml lint
         language: system
-        entry: yamllint --strict -c .github/linters/.yaml-lint.yml
+        entry: yamllint --strict -c .yaml-lint.yml
         description: YamlLint with same config as super-linter
         types: [yaml]
