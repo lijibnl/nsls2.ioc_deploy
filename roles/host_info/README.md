@@ -13,11 +13,11 @@ First, in your playbook, use `nsls2.general.github_vars_facts` to fetch config f
 ```Yaml
     - name: Load host configuration
       nsls2.general.github_vars_facts:
-        path: "host_vars/{{ inventory_hostname }}"
+        path: "{{ component }}/{{ inventory_hostname }}"
         owner: "nsls2"
-        repo: "ioc-deploy-roles"
+        repo: "ioc_host_vars"
         branch: "main"
-        token: "{{ gh_read_token }}"
+        token: "{{ nsls2_ioc_deploy_token }}"
         varname: "host_config"
         recursive: true
 ```
@@ -36,18 +36,18 @@ Then, at the top of your role, simply include this one.
 
 Variable name | Required | Purpose
 --------------|-----------|----------
-`host_config` | Yes | Contains dictionary with all host configuration as read via `nsls2.general.github_vars_facts`
-`ioc_name` | No | If specified, will lookup `host_config[ioc_name]` and place it in the `ioc` variable
+`host_config` | Yes | Contains dictionary with all host configuration as read via `nsls2.general.github_vars_facts`.
+`ioc_name` | No | If specified, will lookup `host_config[ioc_name]` and place it in the `ioc` variable.
 
 ## Output variables
 
 Variable name | Purpose
 ------------|--------------
-`host_info_sci_intf_ip` | IP address of the SCI network interface
-`host_info_epics_intf_ip` | IP addrees of EPICS network interface
-`host_info_epics_subnet` | EPICS broadcast
-`host_info_softioc_user` | Username of user under which IOC will run
-`host_info_softioc_group` | Group that will be assigned to generated files
+`host_info_sci_intf_ip` | IP address of the SCI network interface.
+`host_info_epics_intf_ip` | IP addrees of EPICS network interface.
+`host_info_epics_subnet` | EPICS broadcast.
+`host_info_softioc_user` | Username of user under which IOC will run.
+`host_info_softioc_group` | Group that will be assigned to generated files.
 `host_info_hostname` | Hostname without the domain.
 `host_info_ioc_list` | List of all IOCs configured for host.
 `ioc` | Special variable containing dictionary of IOC configuration requested if `ioc_name` is defined.
