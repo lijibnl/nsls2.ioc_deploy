@@ -96,9 +96,18 @@
   ansible.builtin.debug:
     msg: "{{ host_info_epics_intf_ip }}"
 
-- name: Put IOC list in a variable
+- name: Create empty list to store IOC names
   ansible.builtin.set_fact:
-    host_info_ioc_list: "{{ host_config.iocs }}"
+    host_info_ioc_list: []
+
+- name: Get list of IOC names from loaded config
+  ansible.builtin.set_fact:
+    host_info_ioc_list: >-
+      "{{ host_config |
+          dict2items |
+          selectattr('value', 'mapping') |
+          selectattr('value.type', 'defined') |
+          map(attribute='key') | list }}"
 
 - name: Put IOC configuration in variable
   when: ioc_name is defined

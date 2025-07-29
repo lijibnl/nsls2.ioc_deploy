@@ -1,4 +1,26 @@
 ---
 
+
+- name: Fetch host information
+  ansible.builtin.include_role:
+    name: nsls2.ioc_deploy.host_info
+
+- name: Set manage ioc to all IOCs if requested
+  ansible.builtin.set_fact:
+    manage_iocs_ioc_list: "{{ host_info_ioc_list }}"
+  when: manage_iocs_subcommand == "all"
+
+- name: Set manage ioc to specified IOCs if requested
+  ansible.builtin.set_fact:
+    manage_iocs_ioc_list: "{{ manage_iocs_subcommand.split(',') }}"
+  when: manage_iocs_subcommand != "all"
+
+- name: Show operation to be performed
+  ansible.builtin.debug:
+    msg: "Performing {{ manage_iocs_command }} on: {{ manage_iocs_ioc_list }}"
+
 - name: Run tasks based on command
   ansible.builtin.include_tasks: "{{ manage_iocs_command }}.yml"
+  loop: "{{ manage_iocs_ioc_list }}"
+  loop_control:
+    loop_var: manage_iocs_ioc_name
