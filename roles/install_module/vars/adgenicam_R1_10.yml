@@ -5,7 +5,6 @@ adgenicam_R1_10:
   url: https://github.com/areaDetector/ADGenICam
   version: R1-10
   pkg_deps:
-    - epics-bundle
     - aravis
     - python3.11 # Required for auto-generating database and bobfiles
   include_base_ad_config: true

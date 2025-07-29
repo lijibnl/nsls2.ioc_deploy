@@ -17,14 +17,6 @@
   loop_control:
     loop_var: install_module_release_file
 
-# - name: Remove any unused RELEASE files
-#   ansible.builtin.file:
-#     path: "{{ install_module_release_file['path'] }}"
-#     state: "absent"
-#   loop: "{{ install_module_release_files['files'] }}"
-#   loop_control:
-#     loop_var: install_module_release_file
-
 - name: Create general RELEASE.local file
   ansible.builtin.template:
     src: "templates/RELEASE.j2"
@@ -52,13 +44,28 @@
       loop_control:
         loop_var: install_module_config_site_file
 
-    # - name: Remove any unused CONFIG_SITE files
-    #   ansible.builtin.file:
-    #     path: "{{ install_module_config_site_file['path'] }}"
-    #     state: "absent"
-    #   loop: "{{ install_module_config_site_files['files'] }}"
-    #   loop_control:
-    #     loop_var: install_module_config_site_file
+
+    - name: Remove any unused CONFIG_SITE files for AD modules
+      ansible.builtin.file:
+        path: "{{ install_module_config_site_file['path'] }}"
+        state: "absent"
+      loop: "{{ install_module_config_site_files['files'] }}"
+      loop_control:
+        loop_var: install_module_config_site_file
+      when: >-
+        install_module_config.include_base_ad_config is defined and
+        install_module_config.include_base_ad_config
+
+    - name: For AD modules, create new CONFIG_SITE file
+      ansible.builtin.template:
+        src: "templates/CONFIG_SITE.j2"
+        dest: "{{ item.path }}/CONFIG_SITE"
+        owner: "{{ host_info_softioc_user }}"
+        group: "{{ host_info_softioc_group }}"
+        mode: "0664"
+      when: >-
+        install_module_config.include_base_ad_config is defined and
+        install_module_config.include_base_ad_config
 
     - name: Create general CONFIG_SITE.local file
       ansible.builtin.template:
@@ -67,3 +74,5 @@
         owner: "{{ host_info_softioc_user }}"
         group: "{{ host_info_softioc_group }}"
         mode: "0664"
+      when: install_module_config.include_base_ad_config is not defined or
+            not install_module_config.include_base_ad_config
