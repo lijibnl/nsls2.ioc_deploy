@@ -1,12 +1,12 @@
 ---
 
-ADEiger_R3_4:
-  name: ADEiger_R3_4
+adeiger_R3_4:
+  name: ADEiger
   url: https://github.com/areadetector/ADEiger
   include_base_ad_config: true
   version: R3-4
   module_deps:
-    - ADCore_R3_13
+    - adcore_R3_13
   epics_deps:
     ASYN: /usr/lib/epics
     AUTOSAVE: /usr/lib/epics

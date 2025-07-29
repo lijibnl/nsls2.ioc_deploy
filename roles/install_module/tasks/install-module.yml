@@ -20,21 +20,6 @@
   when: not module_name.startswith("epics_base")
   block:
 
-    - name: Check if module has already been cloned
-      ansible.builtin.stat:
-        path: "{{ install_module_dir }}/.git"
-      register: install_module_cloned
-
-    # The only changes should be to CONFIG_SITE and RELEASE files,
-    # which we will re-apply in a second, so stash them to ensure correct
-    # version is checked out in next step.
-    - name: Stash any local changes if module already cloned
-      ansible.builtin.command:
-        "git -C {{ install_module_dir }} stash" # noqa command-instead-of-module
-      register: stash_result
-      changed_when: stash_result.rc == 0
-      when: install_module_cloned.stat.exists
-
     - name: Clone module repository and checkout the correct version
       ansible.builtin.git:
         repo: "{{ install_module_config.url }}"
@@ -59,11 +44,11 @@
         owner: "{{ host_info_softioc_user }}"
         group: "{{ host_info_softioc_group }}"
         mode: "0664"
-      when: module_name.startswith("ADCore")
+      when: install_module_config.name == "ADCore"
 
     - name: Create dict to track total config entries for module
       ansible.builtin.set_fact:
-        install_module_config_dict:
+        install_module_config_dict: >-
           "{{ install_module_default_config_dict }}"
 
     - name: If module is an AD module, include all standard AD features
@@ -125,4 +110,4 @@
 
 - name: Add module to list of installed modules
   ansible.builtin.set_fact:
-    install_module_installed: "{{ install_module_installed + [module_name] }}"
+    install_module_installed: "{{ install_module_installed | combine({install_module_config.name | upper: install_module_dir}) }}"

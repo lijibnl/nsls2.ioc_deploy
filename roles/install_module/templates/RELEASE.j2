@@ -3,21 +3,18 @@
 # RELEASE location of any EPICS module deps for {{ module_name }}
 #
 
-# List any module dependencies first
+{% if dependency.key != "EPICS_BASE" %}
 {% for dependency in install_module_epics_deps|dict2items %}
 {% if dependency.value.startswith(install_module_install_dir) %}
 {{ dependency.key }}={{ dependency.value }}
 {% endif %}
-{% endfor %}
 
-# Add any remaining deps aside from EPICS_BASE
 {% for dependency in install_module_epics_deps|dict2items %}
 {% if not dependency.value.startswith(install_module_install_dir) %}
-{% if dependency.key != "EPICS_BASE" %}
 {{ dependency.key }}={{ dependency.value }}
 {% endif %}
-{% endif %}
 {% endfor %}
+{% endif %}
 
 # EPICS_BASE should always be last
 EPICS_BASE={{ install_module_epics_deps["EPICS_BASE"] }}

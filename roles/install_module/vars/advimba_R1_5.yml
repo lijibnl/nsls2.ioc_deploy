@@ -1,7 +1,7 @@
 ---
 
 advimba_R1_5:
-  name: advimba_R1_5
+  name: ADVimba
   url: https://github.com/areaDetector/ADVimba
   version: R1-5
   epics_deps:

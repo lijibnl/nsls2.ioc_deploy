@@ -1,15 +1,9 @@
 ---
 
 pmac_2_6_5:
-  name: "pmac_2_6_5"
+  name: "pmac"
   url: "https://github.com/dls-controls/pmac"
   version: "2-6-5"
-  epics_deps:
-    EPICS_BASE: "/usr/lib/epics"
-    ASYN: "/usr/lib/epics"
-    CALC: "/usr/lib/epics"
-    MOTOR: "/usr/lib/epics"
-    BUSY: "/usr/lib/epics"
   pkg_deps:
     - epics-bundle
     - libssh2-devel

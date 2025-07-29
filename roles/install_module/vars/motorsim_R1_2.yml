@@ -1,7 +1,7 @@
 ---
 
 motorsim_R1_2:
-  name: motorsim_R1_2
+  name: MotorSim
   url: https://github.com/epics-motor/motorMotorSim
   version: R1-2
   epics_deps:

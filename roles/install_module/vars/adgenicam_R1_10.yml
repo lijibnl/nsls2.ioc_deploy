@@ -1,18 +1,9 @@
 ---
 
 adgenicam_R1_10:
-  name: adgenicam_R1_10
+  name: ADGenICam
   url: https://github.com/areaDetector/ADGenICam
   version: R1-10
-  epics_deps:
-    EPICS_BASE: /usr/lib/epics
-    ASYN: /usr/lib/epics
-    AUTOSAVE: /usr/lib/epics
-    BUSY: /usr/lib/epics
-    CALC: /usr/lib/epics
-    DEVIOCSTATS: /usr/lib/epics
-    SSCAN: /usr/lib/epics
-    SNCSEQ: /usr/lib/epics
   pkg_deps:
     - epics-bundle
     - aravis

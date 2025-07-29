@@ -1,7 +1,7 @@
 ---
 
 adcore_R3_12_1:
-  name: adcore_R3_12_1
+  name: ADCore
   url: https://github.com/areaDetector/ADCore
   include_base_ad_config: true
   version: R3-12-1
@@ -9,13 +9,3 @@ adcore_R3_12_1:
     - adsupport_R1_10
   pkg_deps:
     - epics-bundle
-  epics_deps:
-    EPICS_BASE: /usr/lib/epics
-    ASYN: /usr/lib/epics
-    AUTOSAVE: /usr/lib/epics
-    BUSY: /usr/lib/epics
-    CALC: /usr/lib/epics
-    DEVIOCSTATS: /usr/lib/epics
-    SSCAN: /usr/lib/epics
-    SNCSEQ: /usr/lib/epics
-    RECCASTER: /usr/lib/epics

@@ -38,36 +38,15 @@
   ansible.builtin.set_fact:
     install_module_epics_deps:
       "{{ install_module_config.epics_deps
-      | combine(install_module_epics_deps) }}"
-  when: install_module_config.epics_deps is defined
-
-- name: Add any already installed modules as epics deps, chopping off version
-  ansible.builtin.set_fact:
-    install_module_epics_deps: >-
-      "{{ install_module_epics_deps
-      | combine({item.split('_')[0] | upper:
-          install_module_install_dir + '/' + item})
-      }}"
-  loop: "{{ install_module_installed }}"
-  when: not module_name.startswith('epics_base')
+      | combine(install_module_installed) }}"
 
 - name: Add module itself to epics deps
   ansible.builtin.set_fact:
     install_module_epics_deps:
       "{{ install_module_epics_deps
-      | combine({module_name.split('_')[0] | upper:
-            install_module_install_dir + '/' + module_name})
+      | combine({install_module_config.name | upper: install_module_dir})
       }}"
   when: not module_name.startswith('epics_base')
-
-- name: If module is EPICS_BASE, add it to the deps
-  ansible.builtin.set_fact:
-    install_module_epics_deps: >-
-      "{{ install_module_epics_deps
-      | combine({'EPICS_BASE':
-            install_module_install_dir + '/' + module_name})
-      }}"
-  when: module_name.startswith('epics_base')
 
 - name: List merged epics dependency list
   ansible.builtin.debug:

@@ -1,7 +1,7 @@
 ---
 
 admerlin_R4_1:
-  name: admerlin_R4_1
+  name: ADMerlin
   url: https://github.com/areadetector/ADMerlin
   include_base_ad_config: true
   version: R4-1
