@@ -79,6 +79,7 @@ jobs:
         run: |
           # shellcheck disable=SC2086
           ansible-lint -c .ansible-lint --offline \
+            --exclude roles/install_module/vars/* \
             ${NEEDS_GET_CHANGED_FILES_OUTPUTS_ALL_CHANGED_FILES}
         env:
           NEEDS_GET_CHANGED_FILES_OUTPUTS_ALL_CHANGED_FILES: ${{ needs.get_changed_files.outputs.all_changed_files }} # yamllint disable-line rule:line-length
