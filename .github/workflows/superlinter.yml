@@ -45,8 +45,7 @@ jobs:
 
       - name: Get changed files
         id: changed-files
-        uses: |
-          step-security/changed-files@3dbe17c78367e7d60f00d78ae6781a35be47b4a1
+        uses: step-security/changed-files@3dbe17c78367e7d60f00d78ae6781a35be47b4a1 # yamllint disable-line rule:line-length
         with:
           files: |
             **/*.{yml,yaml}
@@ -81,5 +80,4 @@ jobs:
           ansible-lint -c .ansible-lint --offline \
             ${NEEDS_GET_CHANGED_FILES_OUTPUTS_ALL_CHANGED_FILES}
         env:
-          NEEDS_GET_CHANGED_FILES_OUTPUTS_ALL_CHANGED_FILES: |
-            ${{ needs.get_changed_files.outputs.all_changed_files }}
+          NEEDS_GET_CHANGED_FILES_OUTPUTS_ALL_CHANGED_FILES: ${{ needs.get_changed_files.outputs.all_changed_files }} # yamllint disable-line rule:line-length
