@@ -13,6 +13,7 @@
 - name: Set manage ioc to specified IOCs if requested
   ansible.builtin.set_fact:
     manage_iocs_ioc_list: "{{ manage_iocs_subcommand.split(',') }}"
+  when: manage_iocs_subcommand != "all"
 
 - name: Show operation to be performed
   ansible.builtin.debug:

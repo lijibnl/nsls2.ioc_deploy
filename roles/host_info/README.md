@@ -44,7 +44,7 @@ Variable name | Required | Purpose
 Variable name | Purpose
 ------------|--------------
 `host_info_sci_intf_ip` | IP address of the SCI network interface.
-`host_info_epics_intf_ip` | IP addrees of EPICS network interface.
+`host_info_epics_intf_ip` | IP address of EPICS network interface.
 `host_info_epics_subnet` | EPICS broadcast.
 `host_info_softioc_user` | Username of user under which IOC will run.
 `host_info_softioc_group` | Group that will be assigned to generated files.

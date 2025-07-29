@@ -102,11 +102,12 @@
 
 - name: Get list of IOC names from loaded config
   ansible.builtin.set_fact:
-    host_info_ioc_list: "{{ host_info_ioc_list + [item.key] }}"
-  loop: "{{ host_config | dict2items }}"
-  when: >-
-    host_config[item.key] is mapping and
-    host_config[item.key]["type"] is defined
+    host_info_ioc_list: >-
+      "{{ host_config |
+          dict2items |
+          selectattr('value', 'mapping') |
+          selectattr('value.type', 'defined') |
+          map(attribute='key') | list }}"
 
 - name: Put IOC configuration in variable
   when: ioc_name is defined
