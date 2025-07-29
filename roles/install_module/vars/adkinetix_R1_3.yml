@@ -1,0 +1,9 @@
+---
+
+adkinetix_R1_3:
+  name: ADKinetix
+  url: https://github.com/NSLS-II/ADKinetix
+  include_base_ad_config: true
+  version: R1-3
+  module_deps:
+    - adcore_R3_13

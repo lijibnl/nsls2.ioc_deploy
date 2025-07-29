@@ -3,7 +3,7 @@
 - name: Fail if module name is not set
   ansible.builtin.fail:
     msg: "Module name must be set"
-  when: module_name is not defined
+  when: install_module_name is not defined
 
 - name: Set facts
   ansible.builtin.include_tasks: set-facts.yml
@@ -17,7 +17,7 @@
     mode: "0775"
 
 - name: Handle standard module
-  when: not module_name.startswith("epics-base")
+  when: not install_module_name.startswith("epics_base")
   block:
 
     - name: Check if module has already been cloned
@@ -59,7 +59,7 @@
         owner: "{{ host_info_softioc_user }}"
         group: "{{ host_info_softioc_group }}"
         mode: "0664"
-      when: module_name.startswith("ADCore")
+      when: install_module_config.name == "ADCore"
 
     - name: Create dict to track total config entries for module
       ansible.builtin.set_fact:
@@ -68,7 +68,7 @@
 
     - name: If module is an AD module, include all standard AD features
       ansible.builtin.set_fact:
-        install_module_config_dict: >-
+        install_module_config_dict:
           "{{ install_module_config_dict
           | combine(install_module_ad_config_dict) }}"
       when: >-
@@ -77,7 +77,7 @@
 
     - name: Add any config overrides for module
       ansible.builtin.set_fact:
-        install_module_config_dict: >-
+        install_module_config_dict:
           "{{ install_module_config_dict
           | combine(install_module_config.config) }}"
       when: module.config is defined
@@ -103,11 +103,22 @@
     version: "{{ install_module_config.version }}"
     force: "{{ install_module_force_reinstall }}"
     recursive: true
-  when: module_name.startswith("epics-base")
+  when: install_module_name.startswith("epics_base")
+
+- name: Get list of required system packages
+  ansible.builtin.set_fact:
+    install_module_pkg_deps: "{{ install_module_default_pkg_deps }}"
+
+- name: Add any module-specific required packages
+  ansible.builtin.set_fact:
+    install_module_pkg_deps:
+      "{{ install_module_pkg_deps
+      | union(install_module_config.pkg_deps) }}"
+  when: install_module_config.pkg_deps is defined
 
 - name: Install any required system packages
   ansible.builtin.dnf:
-    name: "{{ install_module_config.pkg_deps }}"
+    name: "{{ install_module_pkg_deps }}"
     state: present
 
 - name: Compile the module
@@ -125,4 +136,7 @@
 
 - name: Add module to list of installed modules
   ansible.builtin.set_fact:
-    install_module_installed: "{{ install_module_installed + [module_name] }}"
+    install_module_installed:
+      "{{ install_module_installed |
+          combine({install_module_config.name | upper:
+                    install_module_dir}) }}"

@@ -1,19 +1,19 @@
 #
 # {{ ansible_managed }}
-# RELEASE location of any EPICS module deps for {{ module_name }}
+# RELEASE location of any EPICS module deps for {{ install_module_name }}
 #
 
-# List any module dependencies first
 {% for dependency in install_module_epics_deps|dict2items %}
+{% if dependency.key != "EPICS_BASE" %}
 {% if dependency.value.startswith(install_module_install_dir) %}
 {{ dependency.key }}={{ dependency.value }}
 {% endif %}
+{% endif %}
 {% endfor %}
 
-# Add any remaining deps aside from EPICS_BASE
 {% for dependency in install_module_epics_deps|dict2items %}
-{% if not dependency.value.startswith(install_module_install_dir) %}
 {% if dependency.key != "EPICS_BASE" %}
+{% if not dependency.value.startswith(install_module_install_dir) %}
 {{ dependency.key }}={{ dependency.value }}
 {% endif %}
 {% endif %}

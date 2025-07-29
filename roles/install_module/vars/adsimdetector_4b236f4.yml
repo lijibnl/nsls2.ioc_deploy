@@ -1,0 +1,11 @@
+---
+
+adsimdetector_4b236f4:
+  name: ADSimDetector
+  url: https://github.com/areaDetector/ADSimDetector
+  # Use commit hash as version. R2-11 requires newest asyn,
+  # R2-10 breaks with newer ADCore
+  version: 4b236f4
+  include_base_ad_config: true
+  module_deps:
+    - adcore_R3_13

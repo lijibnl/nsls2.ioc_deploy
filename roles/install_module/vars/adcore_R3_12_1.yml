@@ -1,0 +1,9 @@
+---
+
+adcore_R3_12_1:
+  name: ADCore
+  url: https://github.com/areaDetector/ADCore
+  include_base_ad_config: true
+  version: R3-12-1
+  module_deps:
+    - adsupport_R1_10

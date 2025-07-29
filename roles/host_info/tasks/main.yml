@@ -70,10 +70,6 @@
           "{{ host_info_epics_intf_first_three }}.\
           {{ host_info_sci_intf_digits[3] }}"
 
-    - name: Print EPICS interface IP
-      ansible.builtin.debug:
-        msg: "{{ host_info_epics_intf_ip }}"
-
 - name: Set network information based on config
   when: host_config.host_epics_intf is defined
   block:
@@ -92,7 +88,7 @@
       ansible.builtin.set_fact:
         host_info_epics_intf_ip: "{{ host_config.host_epics_intf }}"
 
-- name: Print EPICS IP
+- name: Print EPICS interface IP
   ansible.builtin.debug:
     msg: "{{ host_info_epics_intf_ip }}"
 

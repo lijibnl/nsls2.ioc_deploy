@@ -1,0 +1,12 @@
+---
+
+adgenicam_R1_10:
+  name: ADGenICam
+  url: https://github.com/areaDetector/ADGenICam
+  version: R1-10
+  pkg_deps:
+    - aravis
+    - python3.11 # Required for auto-generating database and bobfiles
+  include_base_ad_config: true
+  module_deps:
+    - adcore_R3_13

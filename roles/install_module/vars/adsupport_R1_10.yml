@@ -1,0 +1,12 @@
+---
+
+adsupport_R1_10:
+  name: ADSupport
+  url: https://github.com/areaDetector/ADSupport
+  include_base_ad_config: true
+  version: R1-10
+  pkg_deps:
+    - libxml2-devel
+    - libXext-devel
+    - zlib-devel
+    - libX11-devel

@@ -3,7 +3,18 @@
 install_module_install_dir: /epics/modules
 install_module_compilation_command: "make -sj"
 install_module_force_reinstall: false
+install_module_default_pkg_deps:
+  - epics-bundle
 install_module_default_epics_deps:
+  ASYN: /usr/lib/epics
+  AUTOSAVE: /usr/lib/epics
+  BUSY: /usr/lib/epics
+  CALC: /usr/lib/epics
+  DEVIOCSTATS: /usr/lib/epics
+  SSCAN: /usr/lib/epics
+  SNCSEQ: /usr/lib/epics
+  RECCASTER: /usr/lib/epics
+  MOTOR: /usr/lib/epics
   EPICS_BASE: /usr/lib/epics # By default, use EPICS bundle location
 install_module_default_config_dict:
   BUILD_IOCS: 'YES'
@@ -38,7 +49,7 @@ install_module_ad_config_dict:
   XML2_EXTERNAL: 'NO'
   WITH_ZLIB: 'YES'
   ZLIB_EXTERNAL: 'NO'
-  ARAVIS_LIB: /opt/aravis/lib64
-  ARAVIS_INCLUDE: /opt/aravis/include/aravis-0.8
+  ARAVIS_LIB: /usr/lib64
+  ARAVIS_INCLUDE: /usr/include/aravis-0.8
   GLIB_INCLUDE: /usr/include/glib-2.0 /usr/lib64/glib-2.0/include
   glib-2.0_DIR: /usr/lib64
