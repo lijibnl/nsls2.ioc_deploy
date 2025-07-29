@@ -6,7 +6,6 @@ adsupport_R1_10:
   include_base_ad_config: true
   version: R1-10
   pkg_deps:
-    - epics-bundle
     - libxml2-devel
     - libXext-devel
     - zlib-devel

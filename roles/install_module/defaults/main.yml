@@ -14,6 +14,7 @@ install_module_default_epics_deps:
   SSCAN: /usr/lib/epics
   SNCSEQ: /usr/lib/epics
   RECCASTER: /usr/lib/epics
+  MOTOR: /usr/lib/epics
   EPICS_BASE: /usr/lib/epics # By default, use EPICS bundle location
 install_module_default_config_dict:
   BUILD_IOCS: 'YES'

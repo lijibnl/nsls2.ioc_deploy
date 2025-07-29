@@ -5,7 +5,6 @@ pmac_2_6_5:
   url: "https://github.com/dls-controls/pmac"
   version: "2-6-5"
   pkg_deps:
-    - epics-bundle
     - libssh2-devel
   # See https://github.com/DiamondLightSource/pmac/pull/131
   # on why -j flag must be avoided for now.

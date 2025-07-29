@@ -7,5 +7,3 @@ adcore_R3_12_1:
   version: R3-12-1
   module_deps:
     - adsupport_R1_10
-  pkg_deps:
-    - epics-bundle

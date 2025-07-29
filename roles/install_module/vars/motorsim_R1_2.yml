@@ -4,8 +4,3 @@ motorsim_R1_2:
   name: MotorSim
   url: https://github.com/epics-motor/motorMotorSim
   version: R1-2
-  epics_deps:
-    EPICS_BASE: /usr/lib/epics
-    MOTOR: /usr/lib/epics
-  pkg_deps:
-    - epics-bundle
