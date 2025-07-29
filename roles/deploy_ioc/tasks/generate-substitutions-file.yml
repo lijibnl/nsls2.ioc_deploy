@@ -1,0 +1,21 @@
+---
+
+- name: Get name of substitution file
+  ansible.builtin.set_fact:
+    deploy_ioc_substitution_file_name: "{{ item.key }}"
+
+- name: Get list of substitution templates
+  ansible.builtin.set_fact:
+    deploy_ioc_substitution_templates: "{{ item.value.templates }}"
+
+- name: Display substitution file name
+  ansible.builtin.debug:
+    msg: "{{ deploy_ioc_substitution_file_name }}"
+
+- name: Install substitutions file
+  ansible.builtin.template:
+    src: templates/default.substitutions.j2
+    dest: "{{ deploy_ioc_iocs_directory }}/{{ ioc_name }}/db/{{ deploy_ioc_substitution_file_name }}.substitutions" # yamllint disable-line rule:line-length
+    owner: "{{ host_info_softioc_user }}"
+    group: "{{ host_info_softioc_group }}"
+    mode: "0664"

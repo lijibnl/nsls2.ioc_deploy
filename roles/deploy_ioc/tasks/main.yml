@@ -1,0 +1,31 @@
+---
+
+- name: Fetch host information
+  ansible.builtin.include_role:
+    name: nsls2.ioc_deploy.host_info
+
+- name: Set deploy iocs to all IOCs if requested
+  ansible.builtin.set_fact:
+    deploy_iocs_ioc_list: "{{ host_info_ioc_list }}"
+  when: deploy_ioc_request == "all"
+
+- name: Set deploy iocs to specified IOCs if requested
+  ansible.builtin.set_fact:
+    deploy_iocs_ioc_list: "{{ deploy_ioc_request.split(',') }}"
+
+- name: Show list of IOCs
+  ansible.builtin.debug:
+    msg: "Deploying IOCs: {{ deploy_ioc_ioc_list }}"
+
+- name: Ensure required system packages are installed
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ deploy_ioc_required_system_packages }}"
+
+- name: Deploy specified IOCs
+  ansible.builtin.include_tasks: "deploy-ioc.yml"
+  loop: "{{ deploy_ioc_ioc_list }}"
+  loop_control:
+    loop_var: ioc_name
+    index_var: deployment_loop_index

@@ -1,0 +1,24 @@
+---
+
+- name: Identify macros in envvar value
+  ansible.builtin.set_fact:
+    deploy_ioc_macros_in_var: "{{ deploy_ioc_merged_env[item] |
+                        regex_findall('\\$\\((.[^\\)]+)\\)') }}"
+
+- name: Assign temporary replacement envvar
+  ansible.builtin.set_fact:
+    deploy_ioc_replaced_macros: "{{ deploy_ioc_merged_env[item] }}"
+
+- name: Replace macros in envvar
+  ansible.builtin.include_tasks: replace-macros.yml
+  loop: "{{ deploy_ioc_macros_in_var }}"
+  loop_control:
+    loop_var: "deploy_ioc_macro_in_var"
+
+- name: Replace value of var in merged env with temp
+  ansible.builtin.set_fact:
+    deploy_ioc_merged_env:
+      "{{ deploy_ioc_merged_env | combine(deploy_ioc_updated_macro) }}"
+  vars:
+    deploy_ioc_updated_macro:
+      "{ '{{ item }}': '{{ deploy_ioc_replaced_macros }}' }"
