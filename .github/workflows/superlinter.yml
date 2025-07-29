@@ -68,16 +68,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install ansible-core==2.14.1 ansible-lint
+          "python -m pip install --upgrade pip"
+          "pip install ansible-core==2.14.1 ansible-lint"
 
       - name: Install ansible galaxy requirements
         run: |
-          ansible-galaxy install -r collections/requirements.yml --timeout 120
+          "ansible-galaxy install -r collections/requirements.yml --timeout 120"
 
       - name: Lint playbook
         run: |
-          ansible-lint -c .ansible-lint --offline \
-            ${NEEDS_GET_CHANGED_FILES_OUTPUTS_ALL_CHANGED_FILES}
+          "ansible-lint -c .ansible-lint --offline \
+            ${NEEDS_GET_CHANGED_FILES_OUTPUTS_ALL_CHANGED_FILES}"
         env:
           NEEDS_GET_CHANGED_FILES_OUTPUTS_ALL_CHANGED_FILES: ${{ needs.get_changed_files.outputs.all_changed_files }} # yamllint disable-line rule:line-length
