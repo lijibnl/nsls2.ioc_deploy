@@ -1,10 +1,10 @@
 ---
 
-adcompvision_9750d13f:
+adcompvision_9750d13:
   name: ADCompVision
   url: https://github.com/areaDetector/ADCompVision
   include_base_ad_config: true
-  version: 9750d13f
+  version: 9750d13
   module_deps:
     - adcore_R3_13
   pkg_deps:
