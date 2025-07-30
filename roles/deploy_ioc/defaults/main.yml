@@ -10,7 +10,9 @@ deploy_ioc_use_common: true
 deploy_ioc_load_as_substitutions: true
 deploy_ioc_manage_iocs_nextport: 4000
 deploy_ioc_as_dir_name: "as"
-deploy_ioc_device_specific_env:
+deploy_ioc_device_specific_env: {}
+# A dictionary for device-specific environment variables. Override this as needed
+# to provide custom environment configurations for specific devices.
 deploy_ioc_ioc_host_vars_read_token: ""
 deploy_ioc_default_env:
   IOC: "{{ ioc.type }}"
