@@ -6,4 +6,4 @@ adkinetix_R1_3:
   include_base_ad_config: true
   version: R1-3
   module_deps:
-    - adcore_R3_13
+    - adcore_90e82cc

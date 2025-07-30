@@ -1,11 +1,11 @@
 ---
 
-adeiger_R3_4:
+adeiger_05e8a65:
   name: ADEiger
   url: https://github.com/areadetector/ADEiger
   include_base_ad_config: true
-  version: R3-4
+  version: 05e8a65
   module_deps:
-    - adcore_R3_13
+    - adcore_90e82cc
   pkg_deps:
     - zeromq-devel

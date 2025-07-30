@@ -8,4 +8,4 @@ adsimdetector_4b236f4:
   version: 4b236f4
   include_base_ad_config: true
   module_deps:
-    - adcore_R3_13
+    - adcore_90e82cc
