@@ -12,6 +12,7 @@
 - name: Set deploy iocs to specified IOCs if requested
   ansible.builtin.set_fact:
     deploy_iocs_ioc_list: "{{ deploy_ioc_request.split(',') }}"
+  when: deploy_ioc_request != "all"
 
 - name: Show list of IOCs
   ansible.builtin.debug:
