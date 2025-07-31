@@ -1,0 +1,6 @@
+---
+
+base_stream_device_7d46ea3:
+  name: BaseStreamDevice
+  url: https://github.com/NSLS2/BaseStreamDevice
+  version: 7d46ea3
