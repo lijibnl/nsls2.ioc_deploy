@@ -1,6 +1,6 @@
 ---
 
-name: Validate configurations
+name: Validate Module Configurations
 permissions:
   contents: read
 
@@ -11,8 +11,8 @@ on:
     branches: [main]
 
 jobs:
-  run_validation_tests:
-    name: Run validation tests
+  run_module_config_validation:
+    name: Run module config validation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -31,6 +31,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements_dev.txt
 
-      - name: Run validation tests
+      - name: Run module config validation
         run: |
-          pytest
+          pytest tests/test_install_module_vars.py --maxfail=1 --disable-warnings -q

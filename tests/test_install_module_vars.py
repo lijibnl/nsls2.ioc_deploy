@@ -1,6 +1,7 @@
-from typing import Callable
-import pytest
 import os
+from typing import Callable
+
+import pytest
 import yaml
 
 INSTALL_MODULE_VARS_DIR = "roles/install_module/vars"
