@@ -1,6 +1,6 @@
 ---
 
-name: Validate Module Configurations
+name: Validate Configurations
 permissions:
   contents: read
 
@@ -11,8 +11,8 @@ on:
     branches: [main]
 
 jobs:
-  run_module_config_validation:
-    name: Run module config validation
+  run_module_vars_files_validation:
+    name: Validate module vars files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
