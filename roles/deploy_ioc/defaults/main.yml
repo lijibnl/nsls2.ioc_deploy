@@ -1,0 +1,38 @@
+---
+
+deploy_ioc_post_deploy_step: "None"
+deploy_ioc_template_root_path: "/usr/lib/epics"
+deploy_ioc_iocs_directory: "/epics/iocs"
+deploy_ioc_executable: "softIoc"
+deploy_ioc_standard_st_cmd: true
+deploy_ioc_standard_post_init: true
+deploy_ioc_use_common: true
+deploy_ioc_load_as_substitutions: true
+deploy_ioc_manage_iocs_nextport: 4000
+deploy_ioc_as_dir_name: "as"
+deploy_ioc_device_specific_env: {}
+# A dictionary for device-specific environment variables. Override this as needed
+# to provide custom environment configurations for specific devices.
+deploy_ioc_ioc_host_vars_read_token: ""
+deploy_ioc_default_env:
+  IOC: "{{ ioc.type }}"
+  IOC_DIR: "{{ deploy_ioc_iocs_directory }}"
+  TOP: "$(IOC_DIR)/{{ ioc_name }}"
+  TEMPLATE_TOP: "{{ deploy_ioc_template_root_path }}"
+  HOSTNAME: "{{ host_info_hostname }}"
+  IOCNAME: "{{ ioc_name }}"
+
+  # Same default EPICS locations for common modules as install_module
+  ASYN: /usr/lib/epics
+  AUTOSAVE: /usr/lib/epics
+  BUSY: /usr/lib/epics
+  CALC: /usr/lib/epics
+  DEVIOCSTATS: /usr/lib/epics
+  SSCAN: /usr/lib/epics
+  SNCSEQ: /usr/lib/epics
+  RECCASTER: /usr/lib/epics
+  MOTOR: /usr/lib/epics
+  EPICS_BASE: /usr/lib/epics
+
+deploy_ioc_required_system_packages:
+  - procServ

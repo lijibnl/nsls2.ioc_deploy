@@ -1,0 +1,44 @@
+# common.cmd
+
+# Load any additional specified databases.
+{% if ioc.substitutions is defined %}
+{% for substitution in ioc.substitutions|dict2items %}
+{% if deploy_ioc_load_as_substitutions %}
+dbLoadTemplate("$(TOP)/db/{{ substitution.key }}.substitutions")
+{% else %}
+{% for template in substitution.value.templates|dict2items %}
+{% for instance in template.value.instances %}
+dbLoadRecords("{{ template.value.filepath }}", "
+{%- for macro in template.value.pattern %}
+{{ macro }}={{ instance[loop.index - 1] }}
+{%- if not loop.last %},
+{%- elif substitution.value.template_macros is defined and substitution.value.template_macros %},{{ substitution.value.template_macros }}")
+{% else %}")
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endif %}
+
+# Load additional records standard for each IOC
+{% if ioc.environment.IOC_PREFIX is defined %}
+dbLoadRecords("$(EPICS_BASE)/db/iocAdminSoft.db", "IOC=$(IOC_PREFIX)")
+dbLoadRecords("$(EPICS_BASE)/db/save_restoreStatus.db", "P=$(IOC_PREFIX)")
+dbLoadRecords("$(EPICS_BASE)/db/reccaster.db", "P=$(IOC_PREFIX)RecSync")
+{% elif ioc.environment.CT_PREFIX is defined %}
+dbLoadRecords("$(EPICS_BASE)/db/iocAdminSoft.db", "IOC=$(CT_PREFIX)")
+dbLoadRecords("$(EPICS_BASE)/db/save_restoreStatus.db", "P=$(CT_PREFIX)")
+dbLoadRecords("$(EPICS_BASE)/db/reccaster.db", "P=$(CT_PREFIX)RecSync")
+{% else %}
+dbLoadRecords("$(EPICS_BASE)/db/iocAdminSoft.db", "IOC=$(PREFIX)")
+dbLoadRecords("$(EPICS_BASE)/db/save_restoreStatus.db", "P=$(PREFIX)")
+dbLoadRecords("$(EPICS_BASE)/db/reccaster.db", "P=$(PREFIX)RecSync")
+{% endif %}
+
+save_restoreSet_Debug(0)
+save_restoreSet_IncompleteSetsOk(1)
+save_restoreSet_DatedBackupFiles(1)
+
+set_savefile_path("$(TOP)/{{ deploy_ioc_as_dir_name }}/save")
+set_requestfile_path("$(TOP)/{{ deploy_ioc_as_dir_name }}/req")

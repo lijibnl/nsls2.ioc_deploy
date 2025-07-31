@@ -1,10 +1,9 @@
 ---
 
-advimba_R1_5:
+advimba_efce1f2:
   name: ADVimba
   url: https://github.com/areaDetector/ADVimba
-  version: R1-5
+  version: efce1f2
   include_base_ad_config: true
   module_deps:
-    - adgenicam_R1_10
-    - adcompvision_9750d13f
+    - adgenicam_5d08a11
