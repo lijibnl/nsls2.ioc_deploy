@@ -24,7 +24,7 @@ INSTALL_MODULE_VARS_FILES = os.listdir(INSTALL_MODULE_VARS_DIR)
 
 
 @pytest.fixture
-def var_file_parser() -> Callable[str, tuple[str, dict, dict]]:
+def var_file_parser() -> Callable[[str], tuple[str, dict, dict]]:
     def parse_var_file(var_file: str):
         module_name_and_ver = os.path.splitext(var_file)[0]
         file_path = os.path.join(INSTALL_MODULE_VARS_DIR, var_file)
