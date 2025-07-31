@@ -53,12 +53,12 @@ def test_install_module_vars_files_valid(var_file):
         # Make sure all required keys are present
         for key in REQUIRED_KEYS:
             assert key in module_config_dict
-            assert type(module_config_dict[key]) is REQUIRED_KEYS[key]
+            assert isinstance(module_config_dict[key], REQUIRED_KEYS[key])
 
         # Check that optional keys, if present, are of correct type
         for key in OPTIONAL_KEYS:
             if key in module_config_dict:
-                assert type(module_config_dict[key]) is OPTIONAL_KEYS[key]
+                assert isinstance(module_config_dict[key], OPTIONAL_KEYS[key])
 
         # Ensure no additional keys present
         for key in module_config_dict:
