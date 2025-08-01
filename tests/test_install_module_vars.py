@@ -18,6 +18,7 @@ OPTIONAL_KEYS: dict[str, type] = {
     "pkg_deps": list,
     "epics_deps": list,
     "compilation_command": str,
+    "config": dict,
 }
 
 INSTALL_MODULE_VARS_FILES = os.listdir(INSTALL_MODULE_VARS_DIR)
