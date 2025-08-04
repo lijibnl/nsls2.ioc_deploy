@@ -57,4 +57,4 @@ jobs:
 
       - name: Run device specific config validation
         run: |
-          pytest tests/test_device_specific_vars.py
+          pytest tests/test_deploy_ioc_vars.py
