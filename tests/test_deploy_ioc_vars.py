@@ -1,6 +1,6 @@
-import pytest
 import os
 
+import pytest
 
 OPTIONAL_KEYS: dict[str, type] = {
     "deploy_ioc_post_deploy_step": str,

@@ -2,7 +2,6 @@ import os
 
 import pytest
 
-
 REQUIRED_KEYS: dict[str, type] = {
     "name": str,
     "url": str,

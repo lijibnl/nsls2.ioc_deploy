@@ -1,8 +1,9 @@
-import pytest
-from pathlib import Path
 import os
-import yaml
 from dataclasses import dataclass
+from pathlib import Path
+
+import pytest
+import yaml
 
 
 @dataclass
