@@ -3,6 +3,6 @@ cd $(TOP)/{{ deploy_ioc_as_dir_name }}/req
 makeAutosaveFiles()
 
 {% for reqfile in deploy_ioc_req_file_list %}
-create_monitor_set("{{ reqfile }}", 5 , "")
+create_monitor_set("{{ reqfile }}", 30 , "")
 {% endfor %}
 cd $(TOP)
