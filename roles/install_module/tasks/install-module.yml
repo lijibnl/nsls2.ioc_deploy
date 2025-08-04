@@ -131,3 +131,7 @@
       "{{ install_module_installed |
           combine({install_module_config.name | upper:
                     install_module_dir}) }}"
+
+- name: Set path of installed leaf module
+  ansible.builtin.set_fact:
+    install_module_leaf_module_path: "{{ install_module_dir }}"
