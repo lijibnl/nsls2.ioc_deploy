@@ -6,4 +6,4 @@ admerlin_399508f:
   include_base_ad_config: true
   version: 399508f
   module_deps:
-    - adcore_90e82cc
+    - adcore_60080dc
