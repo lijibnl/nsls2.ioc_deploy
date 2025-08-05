@@ -29,6 +29,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_BASH: false
           VALIDATE_JSCPD: false
+          VALIDATE_PROTOBUF: false # Conflicts with EPICS proto files
 
   get_changed_files:
     name: Get changed yaml files
