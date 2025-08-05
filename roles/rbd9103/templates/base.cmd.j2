@@ -1,5 +1,5 @@
 
-dbLoadDatabase("{{ deploy_ioc_requred_module_path }}/dbd/{{ deploy_ioc_executable }}.dbd")
+dbLoadDatabase("{{ deploy_ioc_required_module_path }}/dbd/{{ deploy_ioc_executable }}.dbd")
 {{ deploy_ioc_executable }}_registerRecordDeviceDriver(pdbbase)
 
 epicsEnvSet("SERIAL_PORT", "RBD_TTY")
