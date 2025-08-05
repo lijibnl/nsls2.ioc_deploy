@@ -3,7 +3,6 @@
 OPI_DIR={{ deploy_ioc_ioc_directory }}/bobfiles
 
 # Create the directory if it does not exist
-if [ ! -d $OPI_DIR ]; then
 if [ ! -d "$OPI_DIR" ]; then
   mkdir -p "$OPI_DIR"
 fi
