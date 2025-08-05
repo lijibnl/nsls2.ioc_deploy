@@ -9,5 +9,5 @@ adgenicam_5d08a11:
     - python3.11 # Required for auto-generating database and bobfiles
   include_base_ad_config: true
   module_deps:
-    - adcore_90e82cc
+    - adcore_60080dc
     - adcompvision_9750d13

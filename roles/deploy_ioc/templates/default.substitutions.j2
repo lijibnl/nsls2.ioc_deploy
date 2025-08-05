@@ -3,16 +3,16 @@
 # {{ ansible_managed }}
 #
 
-{% for template in deploy_ioc_substitution_templates|dict2items %}
-file "{{ template.value.filepath }}"
+{% for template in deploy_ioc_substitution_templates %}
+file "{{ template.filepath }}"
 {{"{"}}
 pattern
-{{"{"}}{{ template.value.pattern | join(', ') }}{{"}"}}
-{% for instance in template.value.instances %}
+{{"{"}}{{ template.pattern | join(', ') }}{{"}"}}
+{% for instance in template.instances %}
 {{"{"}}
-{%- for macro in template.value.pattern %}
+{%- for macro in template.pattern %}
 {%- if "$(" + macro|string + ")" in instance[loop.index - 1]|string %}
-"{{ instance[loop.index - 1] | replace("$(" + macro + ")", _merged_ioc_environment[macro]) }}"
+"{{ instance[loop.index - 1] | replace("$(" + macro + ")", deploy_ioc_merged_env[macro]) }}"
 {%- else %}
 "{{ instance[loop.index - 1] }}"
 {%- endif %}
