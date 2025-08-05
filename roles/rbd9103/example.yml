@@ -11,7 +11,7 @@ rbd9103-01:
   substitutions:
     rbd9103:
       - filepath: "$(RBD9103)/db/rbd9103.template"
-        pattern: ["P", "R", PORT"]
+        pattern: ["P", "R", "PORT"]
         instances:
           - ["XF:31ID1-ES", "{RBD9103-AMM:1}", "RBD9103"]
       - filepath: "$(RBD9103)/db/rbd9103_recording.template"
