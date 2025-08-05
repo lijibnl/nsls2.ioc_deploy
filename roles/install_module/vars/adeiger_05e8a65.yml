@@ -6,6 +6,6 @@ adeiger_05e8a65:
   include_base_ad_config: true
   version: 05e8a65
   module_deps:
-    - adcore_90e82cc
+    - adcore_60080dc
   pkg_deps:
     - zeromq-devel

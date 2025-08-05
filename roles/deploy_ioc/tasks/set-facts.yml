@@ -1,36 +1,62 @@
 ---
 
+- name: Make sure IOC with given name is configured on host
+  ansible.builtin.fail:
+    msg: "IOC with name {{ deploy_ioc_ioc_name }} is not configured on host"
+  when: deploy_ioc_ioc_name not in host_info_ioc_list
+
+- name: Set IOC configuration to variable
+  ansible.builtin.set_fact:
+    ioc: "{{ host_config[deploy_ioc_ioc_name] }}"
+
+- name: Display read IOC configuration
+  ansible.builtin.debug:
+    msg: "{{ ioc }}"
+
 - name: Get IOC type specific default vars
   ansible.builtin.include_vars: "vars/{{ ioc.type }}.yml"
 
-- name: Set required module
-  ansible.builtin.set_fact:
-    deploy_ioc_required_module: "{{ deploy_ioc_required_module }}"
-  when: deploy_ioc_required_module is defined
+- name: Handle any module requirements
+  when: deploy_ioc_required_module is defined or ioc.required_module is defined
+  block:
+    - name: Set required module
+      ansible.builtin.set_fact:
+        deploy_ioc_required_module: "{{ deploy_ioc_required_module }}"
+      when: deploy_ioc_required_module is defined
 
-- name: Override default required module if specified
-  ansible.builtin.set_fact:
-    deploy_ioc_required_module: "{{ ioc.required_module }}"
-  when: ioc.required_module is defined
+    - name: Override default required module if specified
+      ansible.builtin.set_fact:
+        deploy_ioc_required_module: "{{ ioc.required_module }}"
+      when: ioc.required_module is defined
 
-- name: Install any modules that are required for this IOC type
-  ansible.builtin.include_role:
-    name: nsls2.ioc_deploy.install_module
-  when: deploy_ioc_required_module is defined
-  vars:
-    install_module_name: "{{ deploy_ioc_required_module }}"
+    - name: Install any modules that are required for this IOC type
+      ansible.builtin.include_role:
+        name: nsls2.ioc_deploy.install_module
+      vars:
+        install_module_name: "{{ deploy_ioc_required_module }}"
 
-- name: Merge all environment dicts
+    - name: Create variable that stores path to installed required module
+      ansible.builtin.set_fact:
+        deploy_ioc_required_module_path: "{{ install_module_leaf_module_path }}"
+
+- name: Get default environment variables for ioc type
   ansible.builtin.set_fact:
     deploy_ioc_merged_env:
       "{{ deploy_ioc_default_env |
-          combine(deploy_ioc_device_specific_env, ioc.environment) }}"
+          combine(deploy_ioc_device_specific_env) }}"
 
 - name: Merge any installed module locations into environment
   ansible.builtin.set_fact:
     deploy_ioc_merged_env:
-      "{{ deploy_ioc_merged_env | combine(install_module_installed) }}"
+      "{{ deploy_ioc_merged_env
+          | combine(install_module_epics_deps, install_module_installed) }}"
   when: deploy_ioc_required_module is defined
+
+- name: Merge in instance specific environment
+  ansible.builtin.set_fact:
+    deploy_ioc_merged_env:
+      "{{ deploy_ioc_merged_env | combine(ioc.environment) }}"
+  when: ioc.environment is defined
 
 - name: Show merged environment pre-macro substitution
   ansible.builtin.debug:

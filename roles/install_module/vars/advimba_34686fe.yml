@@ -1,9 +1,9 @@
 ---
 
-advimba_efce1f2:
+advimba_34686fe:
   name: ADVimba
   url: https://github.com/areaDetector/ADVimba
-  version: efce1f2
+  version: 34686fe
   include_base_ad_config: true
   module_deps:
     - adgenicam_5d08a11

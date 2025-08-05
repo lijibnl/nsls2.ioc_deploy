@@ -104,19 +104,3 @@
           selectattr('value', 'mapping') |
           selectattr('value.type', 'defined') |
           map(attribute='key') | list }}"
-
-- name: Put IOC configuration in variable
-  when: ioc_name is defined
-  block:
-    - name: Make sure IOC with given name is configured on host
-      ansible.builtin.fail:
-        msg: "IOC with name {{ ioc_name }} is not configured on host"
-      when: ioc_name not in host_info_ioc_list
-
-    - name: Set IOC configuration to variable
-      ansible.builtin.include_vars:
-        ioc: "{{ lookup('vars', ioc_name) }}"
-
-    - name: Display read IOC configuration
-      ansible.builtin.debug:
-        msg: "{{ ioc }}"
