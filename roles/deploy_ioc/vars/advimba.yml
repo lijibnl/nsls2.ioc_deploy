@@ -8,7 +8,7 @@ deploy_ioc_use_common: false
 deploy_ioc_use_ad_common: true
 deploy_ioc_req_files:
   - "auto_settings.req"
-deploy_ioc_specific_default_env:
+deploy_ioc_device_specific_env:
   PORT: "VMB1"
   QSIZE: 20
   NCHANS: 2048
