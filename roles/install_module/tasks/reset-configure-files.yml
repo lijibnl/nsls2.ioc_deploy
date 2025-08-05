@@ -17,37 +17,73 @@
   loop_control:
     loop_var: install_module_release_file
 
-- name: Create general RELEASE.local file
+- name: Set name of output RELEASE files
+  ansible.builtin.set_fact:
+    install_module_release_file_name: "RELEASE.local"
+
+- name: Handle case where RELEASE files should be overwritten
+  when: >-
+    install_module_config.overwrite_release is defined and
+    install_module_config.overwrite_release | bool
+  block:
+    - name: Remove existing RELEASE files
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ install_module_release_files['files'] }}"
+
+    - name: Set name of output RELEASE files
+      ansible.builtin.set_fact:
+        install_module_release_file_name: "RELEASE"
+
+- name: Create general RELEASE file
   ansible.builtin.template:
     src: "templates/RELEASE.j2"
-    dest: "{{ item.path }}/RELEASE.local"
+    dest: "{{ item.path }}/{{ install_module_release_file_name }}"
     owner: "{{ host_info_softioc_user }}"
     group: "{{ host_info_softioc_group }}"
     mode: "0664"
 
-- name: If config overridden, find and remove CONFIG_SITE files
+- name: Find all existing CONFIG_SITE* files
+  ansible.builtin.find:
+    file_type: "any"
+    paths: "{{ item.path }}"
+    patterns:
+      - "CONFIG_SITE*"
+      - "CONFIG_SITE"
+    use_regex: true
+  register: install_module_config_site_files
+
+- name: Print list of existing CONFIG_SITE files
+  ansible.builtin.debug:
+    msg: "{{ install_module_config_site_file['path'] }}"
+  loop: "{{ install_module_config_site_files['files'] }}"
+  loop_control:
+    loop_var: install_module_config_site_file
+
+- name: Set name of output CONFIG_SITE files
+  ansible.builtin.set_fact:
+    install_module_config_site_file_name: "CONFIG_SITE.local"
+
+- name: Handle case where CONFIG_SITE files should be overwritten
+  when: >-
+    install_module_config.overwrite_config_site is defined and
+    install_module_config.overwrite_config_site | bool
   block:
-    - name: Find all existing CONFIG_SITE* files
-      ansible.builtin.find:
-        file_type: "any"
-        paths: "{{ item.path }}"
-        patterns:
-          - "CONFIG_SITE*"
-          - "CONFIG_SITE"
-        use_regex: true
-      register: install_module_config_site_files
-
-    - name: Print list of existing CONFIG_SITE files
-      ansible.builtin.debug:
-        msg: "{{ install_module_config_site_file['path'] }}"
+    - name: Remove existing CONFIG_SITE files
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
       loop: "{{ install_module_config_site_files['files'] }}"
-      loop_control:
-        loop_var: install_module_config_site_file
 
-    - name: Create general CONFIG_SITE.local file
-      ansible.builtin.template:
-        src: "templates/CONFIG_SITE.j2"
-        dest: "{{ item.path }}/CONFIG_SITE.local"
-        owner: "{{ host_info_softioc_user }}"
-        group: "{{ host_info_softioc_group }}"
-        mode: "0664"
+    - name: Set name of output CONFIG_SITE files
+      ansible.builtin.set_fact:
+        install_module_config_site_file_name: "CONFIG_SITE"
+
+- name: Generate CONFIG_SITE files
+  ansible.builtin.template:
+    src: "templates/CONFIG_SITE.j2"
+    dest: "{{ item.path }}/{{ install_module_config_site_file_name }}"
+    owner: "{{ host_info_softioc_user }}"
+    group: "{{ host_info_softioc_group }}"
+    mode: "0664"

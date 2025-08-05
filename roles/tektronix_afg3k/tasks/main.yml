@@ -10,12 +10,12 @@
 
 - name: Install EPICS database template files
   ansible.builtin.copy:
-    src: files/{{ item }}
-    dest: "{{ deploy_ioc_ioc_directory }}/db/{{ item }}"
+    src: "{{ item }}"
+    dest: "{{ deploy_ioc_ioc_directory }}/db"
     owner: "{{ host_info_softioc_user }}"
     group: "{{ host_info_softioc_group }}"
     mode: "0664"
-  with_fileglob: files/*.template
+  with_fileglob: "files/*.template"
 
 - name: Create protocol directory
   ansible.builtin.file:

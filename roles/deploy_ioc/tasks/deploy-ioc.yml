@@ -10,7 +10,7 @@
   block:
     - name: Check if IOC service exists
       ansible.builtin.stat:
-        path: /etc/systemd/system/softioc-{{ ioc_name }}.service
+        path: /etc/systemd/system/softioc-{{ deploy_ioc_ioc_name }}.service
       register: deploy_ioc_service_file
 
     - name: Ensure IOC service is stopped
@@ -18,7 +18,7 @@
         name: manage_iocs
       vars:
         manage_iocs_command: "stop"
-        manage_iocs_subcommand: "{{ ioc_name }}"
+        manage_iocs_subcommand: "{{ deploy_ioc_ioc_name }}"
       when: deploy_ioc_service_file.stat.exists
 
 - name: Create IOC directory
@@ -100,7 +100,7 @@
 - name: Writeout IOC configuration used to yml
   ansible.builtin.copy:
     content: "{{ ioc | to_nice_yaml }}"
-    dest: "{{ deploy_ioc_ioc_directory }}/{{ ioc_name }}.yml"
+    dest: "{{ deploy_ioc_ioc_directory }}/{{ deploy_ioc_ioc_name }}.yml"
     owner: "{{ host_info_softioc_user }}"
     group: "{{ host_info_softioc_group }}"
     mode: "0664"
@@ -116,7 +116,7 @@
         name: nsls2.ioc_deploy.manage_iocs
       vars:
         manage_iocs_command: "install"
-        manage_iocs_ioc_name: "{{ ioc_name }}"
+        manage_iocs_deploy_ioc_ioc_name: "{{ deploy_ioc_ioc_name }}"
       when:
         - deploy_ioc_post_deploy_step == "Install" or
           deploy_ioc_post_deploy_step == "Install and Enable" or
@@ -128,7 +128,7 @@
         name: manage_iocs
       vars:
         manage_iocs_command: "enable"
-        manage_iocs_ioc_name: "{{ ioc_name }}"
+        manage_iocs_deploy_ioc_ioc_name: "{{ deploy_ioc_ioc_name }}"
       when:
         - deploy_ioc_post_deploy_step == "Install and Enable" or
           deploy_ioc_post_deploy_step == "Install and Enable and Start"
@@ -138,7 +138,7 @@
         name: manage_iocs
       vars:
         manage_iocs_command: "restart"
-        manage_iocs_ioc_name: "{{ ioc_name }}"
+        manage_iocs_deploy_ioc_ioc_name: "{{ deploy_ioc_ioc_name }}"
       when:
         - deploy_ioc_post_deploy_step == "Restart" or
           deploy_ioc_post_deploy_step == "Install and Start" or

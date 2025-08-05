@@ -14,6 +14,10 @@ OPTIONAL_KEYS: dict[str, type] = {
     "pkg_deps": list,
     "epics_deps": list,
     "compilation_command": str,
+    "config": dict,
+    "overwrite_release": bool,
+    "overwrite_config_site": bool,
+    "use_token": bool,
 }
 
 
