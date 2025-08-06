@@ -46,16 +46,16 @@ pytestmark = pytest.mark.parametrize("device_role", DEVICE_ROLES)
 
 
 def test_ensure_example_present(device_role):
-    assert os.path.exists(os.path.join("roles", device_role, "example.yml")), (
-        f"Example configuration file for {device_role} role is missing."
-    )
+    assert os.path.exists(
+        os.path.join("roles", device_role, "example.yml")
+    ), f"Example configuration file for {device_role} role is missing."
 
 
 def test_ensure_required_schema_present(device_role):
     schema_path = os.path.join("roles", device_role, "schema.yml")
-    assert os.path.exists(schema_path), (
-        f"Schema file for {device_role} role is missing at {schema_path}."
-    )
+    assert os.path.exists(
+        schema_path
+    ), f"Schema file for {device_role} role is missing at {schema_path}."
 
 
 def test_ensure_example_validates_with_base_schema(device_role):
