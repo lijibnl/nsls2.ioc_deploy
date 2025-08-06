@@ -27,6 +27,12 @@ repos:
         description: YamlLint with same config as super-linter
         types: [yaml]
 
+      - id: isort
+        name: isort
+        language: system
+        entry: isort .
+        types: [python]
+
       - id: ruff
         name: lint with ruff
         language: system

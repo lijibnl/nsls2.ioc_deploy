@@ -1,8 +1,9 @@
-import pytest
-from schema import Schema, Or, Optional
 import os
-import yaml
+
+import pytest
 import yamale
+import yaml
+from schema import Optional, Or, Schema
 
 COMMON_ROLES = [
     "install_module",
@@ -39,7 +40,6 @@ BASE_IOC_CONFIG_SCHEMA = Schema(
     },
     ignore_extra_keys=True,
 )
-
 
 
 pytestmark = pytest.mark.parametrize("device_role", DEVICE_ROLES)
