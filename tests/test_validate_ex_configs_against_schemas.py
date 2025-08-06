@@ -4,9 +4,19 @@ import os
 import yaml
 import yamale
 
+COMMON_ROLES = [
+    "install_module",
+    "deploy_ioc",
+    "deploy_common",
+    "host_info",
+    "manage_iocs",
+]
+
+DEVICE_ROLES = [role for role in os.listdir("roles") if role not in COMMON_ROLES]
+
 BASE_IOC_CONFIG_SCHEMA = Schema(
     {
-        "type": str,
+        "type": Or(*DEVICE_ROLES),
         "environment": {str: Or(str, int, float)},
         Optional("substitutions"): {
             str: Or(
@@ -30,15 +40,7 @@ BASE_IOC_CONFIG_SCHEMA = Schema(
     ignore_extra_keys=True,
 )
 
-COMMON_ROLES = [
-    "install_module",
-    "deploy_ioc",
-    "deploy_common",
-    "host_info",
-    "manage_iocs",
-]
 
-DEVICE_ROLES = [role for role in os.listdir("roles") if role not in COMMON_ROLES]
 
 pytestmark = pytest.mark.parametrize("device_role", DEVICE_ROLES)
 
