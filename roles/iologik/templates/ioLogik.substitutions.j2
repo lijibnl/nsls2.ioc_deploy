@@ -13,7 +13,7 @@ file "$(TOP)/db/dioConfig.template"
 pattern
 { P        , R                , N          , DIO_MODE       }
 {% for i in range(iologik_connections[iologik_device.model]["DIO"]) %}
-{ "{{ ioc.environment.SYS }}", "{{"{"}}{{ iologik_device_prefix }}{{ iologik_index + 1 }}:{{ iologik_device.model }}{{"}"}}:", "{{ i + 1 }}",  "{{ 1 if iologik_device.dio_conifg[i] == "DO" else 0 }}" }
+{ "{{ ioc.environment.SYS }}", "{{"{"}}{{ iologik_device_prefix }}{{ iologik_index + 1 }}:{{ iologik_device.model }}{{"}"}}:", "{{ i + 1 }}",  "{{ 1 if iologik_device.dio_config[i] == "DO" else 0 }}" }
 {% endfor %}
 }
 {% endif %}
@@ -26,7 +26,7 @@ pattern
 { P        , R                , PORT          , OFFSET, ZNAM  , ONAM  , ZSV      , OSV      , SCAN       }
 {% for i in range(iologik_connections[iologik_device.model]["DI"] + iologik_connections[iologik_device.model]["DIO"]) %}
 {% set curr_dio_num = i - iologik_connections[iologik_device.model]["DI"] %}
-{% if i < iologik_connections[iologik_device.model]["DI"] or (iologik_device|length >=2 and iologik_device.dio_conifg[curr_dio_num] == "DI" ) %}
+{% if i < iologik_connections[iologik_device.model]["DI"] or (iologik_device|length >=2 and iologik_device.dio_config[curr_dio_num] == "DI" ) %}
 { "{{ ioc.environment.SYS }}" , "{{"{"}}{{ iologik_device_prefix }}{{ iologik_index + 1 }}:{{ iologik_device.model }}{{"}"}}:DI{{ i + 1 }}-Sts" , IOL{{ iologik_index + 1 }}_DI, {{ i }}     , Low   , High  , NO_ALARM , NO_ALARM , "I/O Intr" }
 {% endif %}
 {% endfor %}
@@ -54,7 +54,7 @@ pattern
 { P        , R                , PORT          , OFFSET, ZNAM  , ONAM  }
 {% for i in range(iologik_connections[iologik_device.model]["DO"] + iologik_connections[iologik_device.model]["DIO"]) %}
 {% set curr_dio_num = i - iologik_connections[iologik_device.model]["DO"] %}
-{% if i < iologik_connections[iologik_device.model]["DO"] or (iologik_device|length >=2 and iologik_device.dio_conifg[curr_dio_num] == "DO" ) %}
+{% if i < iologik_connections[iologik_device.model]["DO"] or (iologik_device|length >=2 and iologik_device.dio_config[curr_dio_num] == "DO" ) %}
 { "{{ ioc.environment.SYS }}"   , "{{"{"}}{{ iologik_device_prefix }}{{ iologik_index + 1 }}:{{ iologik_device.model }}{{"}"}}:DO{{ i + 1 }}-Cmd" , IOL{{ iologik_index + 1 }}_DO, {{ i }}    , Low, High}
 {% endif %}
 {% endfor %}
@@ -65,7 +65,7 @@ pattern
 { P        , R                , PORT          , OFFSET, ZNAM  , ONAM  , ZSV      , OSV      , SCAN       }
 {% for i in range(iologik_connections[iologik_device.model]["DO"] + iologik_connections[iologik_device.model]["DIO"]) %}
 {% set curr_dio_num = i - iologik_connections[iologik_device.model]["DO"] %}
-{% if i < iologik_connections[iologik_device.model]["DO"] or (iologik_device|length >=2 and iologik_device.dio_conifg[curr_dio_num] == "DO" ) %}
+{% if i < iologik_connections[iologik_device.model]["DO"] or (iologik_device|length >=2 and iologik_device.dio_config[curr_dio_num] == "DO" ) %}
 { "{{ ioc.environment.SYS }}" , "{{"{"}}{{ iologik_device_prefix }}{{ iologik_index + 1 }}:{{ iologik_device.model }}{{"}"}}:DO{{ i + 1 }}-Sts" , IOL{{ iologik_index + 1 }}_DO_RBV, {{ i }}  , Low   , High  , NO_ALARM , NO_ALARM , "I/O Intr" }
 {% endif %}
 {% endfor %}

@@ -57,7 +57,8 @@ jobs:
 
       - name: Run device specific config validation
         run: |
-          pytest tests/test_deploy_ioc_vars.py
+          pytest tests/test_deploy_ioc_vars.py tests/test_device_roles.py
+
   run_validation_of_example_configs:
     name: Validate example configs
     runs-on: ubuntu-latest
