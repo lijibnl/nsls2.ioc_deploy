@@ -14,6 +14,9 @@
   ansible.builtin.file:
     path: "{{ deploy_ioc_ioc_directory }}/venv"
     state: directory
+    owner: "{{ host_info_softioc_user }}"
+    group: "{{ host_info_softioc_group }}"
+    mode: "0775"
 
 - name: Create python3.11 virtual environment
   ansible.builtin.command:
