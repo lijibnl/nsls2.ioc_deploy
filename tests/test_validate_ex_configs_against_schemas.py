@@ -67,7 +67,7 @@ def test_ensure_example_validates_with_base_schema(device_role):
             BASE_IOC_CONFIG_SCHEMA.validate(ioc_config)
         except Exception as e:
             pytest.fail(
-                f"Example configuration for {ioc_name} in {device_role} role does not conform to the base IOC config schema: {e}"
+                f"Ex. config for {ioc_name} in {device_role} role doesn't conform to the base IOC config schema: {e}"
             )
 
 
@@ -88,5 +88,5 @@ def test_ensure_example_validates_with_role_specific_schema(device_role):
         yamale.validate(schema, data, strict=False)
     except yamale.YamaleError as e:
         pytest.fail(
-            f"Example configuration for {ioc_name} in {device_role} role does not conform to the role-specific schema: {e}"
+            f"Ex. config for {ioc_name} in {device_role} role doesn't conform to the role-specific schema: {e}"
         )
