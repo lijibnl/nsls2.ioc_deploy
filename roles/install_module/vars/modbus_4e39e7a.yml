@@ -1,5 +1,0 @@
----
-modbus_4e39e7a:
-  name: modbus
-  url: "https://github.com/epics-modules/modbus"
-  version: "4e39e7a"
