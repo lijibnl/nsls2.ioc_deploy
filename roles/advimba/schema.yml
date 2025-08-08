@@ -1,0 +1,7 @@
+---
+type: enum("advimba")
+
+environment:
+  PREFIX: str()  # Base PV prefix
+  CAMERA_ID: str()  # Camera ID from the camera label or from the AVT software
+  FFMSTREAM_PORT: str(required=False)  # Port for the ffmpeg stream server

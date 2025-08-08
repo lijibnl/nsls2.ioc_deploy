@@ -7,3 +7,6 @@ admerlin_399508f:
   version: 399508f
   module_deps:
     - adcore_60080dc
+    - adcompvision_9750d13
+    - adpluginbar_567847d
+    - ffmpeg_server_07c570f
