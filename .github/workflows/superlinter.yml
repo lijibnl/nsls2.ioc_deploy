@@ -30,7 +30,7 @@ jobs:
           VALIDATE_BASH: false
           VALIDATE_JSCPD: false
           VALIDATE_PROTOBUF: false # Conflicts with EPICS proto files
-          DISABLE_LINTERS: PYTHON_BLACK # Conflicts with ruff
+          VALIDATE_PYTHON_BLACK: false # Conflicts with ruff
 
   get_changed_files:
     name: Get changed yaml files
