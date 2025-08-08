@@ -1,6 +1,6 @@
 ---
 
-type: regex("iologik")
+type: enum("iologik")
 devices: list(include("iologik_default_model"), include("iologik_4_dio_model"), include("iologik_8_dio_model")) # yamllint disable-line rule:line-length
 environment:
   SYS: str()  # Base PV prefix
@@ -8,15 +8,15 @@ environment:
 
 ---
 iologik_default_model:
-  model: regex("E1210|E1211|E1214|E1240|E1241|E1260|E1262")
+  model: enum("E1210", "E1211", "E1214", "E1240", "E1241", "E1260", "E1262")
   ip: ip()
 
 iologik_4_dio_model:
-  model: regex("E1213|E1242")
+  model: enum("E1213", "E1242")
   ip: ip()
-  dio_config: list(regex("DI|DO"), min_items=4, max_items=4)
+  dio_config: list(enum("DI", "DO"), min_items=4, max_items=4)
 
 iologik_8_dio_model:
-  model: regex("E1212")
+  model: enum("E1212")
   ip: ip()
-  dio_config: list(regex("DI|DO"), min_items=8, max_items=8)
+  dio_config: list(enum("DI", "DO"), min_items=8, max_items=8)
