@@ -33,7 +33,9 @@ def test_ensure_example_present(device_role):
 
 def test_ensure_required_schema_present(device_role):
     schema_path = os.path.join("roles", device_role, "schema.yml")
-    assert os.path.exists(schema_path), f"Schema file for {device_role} role is missing at {schema_path}."
+    assert os.path.exists(schema_path), (
+        f"Schema file for {device_role} role is missing at {schema_path}."
+    )
 
 
 def test_ensure_example_validates_with_base_schema(device_role):
@@ -46,13 +48,15 @@ def test_ensure_example_validates_with_base_schema(device_role):
     validators["ioc_type"] = IOCTypeValidator
 
     data = yamale.make_data(content=yaml.dump(ioc_config))
-    base_schema = yamale.make_schema("roles/deploy_ioc/schema.yml", validators=validators)
+    base_schema = yamale.make_schema(
+        "roles/deploy_ioc/schema.yml", validators=validators
+    )
 
     try:
         yamale.validate(base_schema, data, strict=False)
     except Exception as e:
         pytest.fail(
-            f"Ex. config for {ioc_name} in {device_role} role doesn't conform to the base IOC config schema: {e}"
+            f"Example for {device_role} role doesn't conform to the base schema: {e}"
         )
 
 
@@ -72,4 +76,6 @@ def test_ensure_example_validates_with_role_specific_schema(device_role):
     try:
         yamale.validate(schema, data, strict=False)
     except yamale.YamaleError as e:
-        pytest.fail(f"Ex. config for {ioc_name} in {device_role} role doesn't conform to the role-specific schema: {e}")
+        pytest.fail(
+            f"Example for {device_role} role doesn't conform to the schema: {e}"
+        )
