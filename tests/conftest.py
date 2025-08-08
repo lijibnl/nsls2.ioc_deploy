@@ -19,7 +19,7 @@ def var_file_reader_factory():
         var_file_paths = [f for f in var_file_path.glob("*.yml") if f.is_file()]
         var_files = {}
         for var_file in var_file_paths:
-            with open(var_file, "r") as file:
+            with open(var_file) as file:
                 var_files[os.path.splitext(var_file.name)[0]] = VarFile(
                     name=os.path.splitext(var_file.name)[0],
                     path=var_file,

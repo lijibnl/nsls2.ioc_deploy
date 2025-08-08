@@ -34,13 +34,17 @@ def test_deploy_ioc_var_file_has_matching_role(deploy_ioc_var_file):
 
 
 def test_deploy_ioc_var_files_valid(deploy_ioc_var_file):
-    for key in deploy_ioc_var_file.data:
-        assert key in OPTIONAL_KEYS
-        assert type(deploy_ioc_var_file.data[key]) is OPTIONAL_KEYS[key]
+    if deploy_ioc_var_file.data:
+        for key in deploy_ioc_var_file.data:
+            assert key in OPTIONAL_KEYS
+            assert type(deploy_ioc_var_file.data[key]) is OPTIONAL_KEYS[key]
 
 
 def test_deploy_ioc_var_file_required_module_exists(deploy_ioc_var_file):
-    if "deploy_ioc_required_module" in deploy_ioc_var_file.data:
+    if (
+        deploy_ioc_var_file.data
+        and "deploy_ioc_required_module" in deploy_ioc_var_file.data
+    ):
         if deploy_ioc_var_file.data["deploy_ioc_required_module"]:
             assert os.path.exists(
                 os.path.join(
