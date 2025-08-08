@@ -57,4 +57,29 @@ jobs:
 
       - name: Run device specific config validation
         run: |
-          pytest tests/test_deploy_ioc_vars.py
+          pytest tests/test_deploy_ioc_vars.py tests/test_device_roles.py
+
+  run_validation_of_example_configs:
+    name: Validate example configs
+    runs-on: ubuntu-latest
+    needs: run_device_specific_vars_files_validation
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements_dev.txt
+
+      - name: Run example config validation
+        run: |
+          pytest tests/test_validate_ex_configs_against_schemas.py
