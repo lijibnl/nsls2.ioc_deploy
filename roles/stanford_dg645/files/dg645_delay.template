@@ -73,4 +73,3 @@ record(mbbi, "$(Sys)$(Dev)DO:Rel-Sts"){
 	field(INP, "@dg645.proto readDelayRel($(CHAN)) $(PORT)")
 	field(SCAN, "$(SCAN)")
 }
-
