@@ -1,0 +1,16 @@
+deploy_ioc_as_dir_name: autosave
+deploy_ioc_executable: kinetixApp
+deploy_ioc_required_module: adkinetix_1c03d32
+deploy_ioc_template_root_path: '{{ deploy_ioc_required_module_path }}/iocs/kinetixIOC'
+deploy_ioc_use_ad_common: true
+deploy_ioc_use_common: false
+deploy_ioc_req_file_list:
+  - auto_settings.req
+deploy_ioc_device_specific_env:
+  CBUFFS: 500
+  MAX_THREADS: 8
+  NCHANS: 2048
+  PORT: KTX
+  QSIZE: 20
+  XSIZE: 3200
+  YSIZE: 3200

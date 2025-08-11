@@ -5,4 +5,9 @@ makeAutosaveFiles()
 {% for reqfile in deploy_ioc_req_file_list %}
 create_monitor_set("{{ reqfile }}", 30 , "")
 {% endfor %}
+
+{% for dbpf in deploy_ioc_dbpf_list|dict2items %}
+dbpf "{{ dbpf.key }}", "{{ dbpf.value }}"
+{% endfor %}
+
 cd $(TOP)

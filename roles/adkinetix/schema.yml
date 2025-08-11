@@ -1,0 +1,8 @@
+---
+type: enum("adkinetix")
+environment:
+  PREFIX: str()
+  PORT: str()
+  XSIZE: int(min=1)
+  YSIZE: int(min=1)
+

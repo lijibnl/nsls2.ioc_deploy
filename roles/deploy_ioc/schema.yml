@@ -4,6 +4,7 @@ environment: map(any(str(), int(), num()), key=str())
 substitutions: map(any(list(include("substitution")), include("template")), key=str(), required=False) # yamllint disable-line rule:line-length
 executable: str(required=False)
 required_module: str(required=False)
+dbpf: map(str(), str(), required=False)
 
 ---
 

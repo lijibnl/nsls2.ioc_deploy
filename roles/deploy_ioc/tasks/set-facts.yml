@@ -13,6 +13,14 @@
   ansible.builtin.debug:
     msg: "{{ ioc }}"
 
+- name: Create empty default req file list
+  ansible.builtin.set_fact:
+    deploy_ioc_req_file_list: []
+
+- name: Create empty dict for dbpf list
+  ansible.builtin.set_fact:
+    deploy_ioc_dbpf_list: {}
+
 - name: Get IOC type specific default vars
   ansible.builtin.include_vars: "vars/{{ ioc.type }}.yml"
 
@@ -91,3 +99,9 @@
   ansible.builtin.set_fact:
     substitutions: "{{ ioc.substitutions }}"
   when: ioc.substitutions is defined
+
+- name: Merge any ioc specific dbpf entries
+  ansible.builtin.set_fact:
+    deploy_ioc_dbpf_list:
+      "{{ deploy_ioc_dbpf_list | combine(ioc.dbpf) }}"
+  when: ioc.dbpf is defined
