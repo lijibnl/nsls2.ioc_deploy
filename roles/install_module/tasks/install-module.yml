@@ -137,12 +137,17 @@
   register: install_module_ownership_result
   changed_when: install_module_ownership_result.rc == 0
 
-- name: Add module to list of installed modules
+- name: Add module to dict mapping module names to paths
   ansible.builtin.set_fact:
     install_module_installed:
       "{{ install_module_installed |
           combine({install_module_config.name | upper:
                     install_module_dir}) }}"
+
+- name: Add module to installed modules list
+  ansible.builtin.set_fact:
+    install_module_installed_list:
+      "{{ install_module_installed_list + [install_module_name] }}"
 
 - name: Set path of installed leaf module
   ansible.builtin.set_fact:

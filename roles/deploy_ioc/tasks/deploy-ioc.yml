@@ -108,8 +108,16 @@
 
 - name: Writeout IOC configuration used to yml
   ansible.builtin.copy:
-    content: "{{ ioc | to_nice_yaml }}"
+    content: "{{ {deploy_ioc_ioc_name: ioc} | to_nice_yaml(sort_keys=False) }}"
     dest: "{{ deploy_ioc_ioc_directory }}/{{ deploy_ioc_ioc_name }}.yml"
+    owner: "{{ host_info_softioc_user }}"
+    group: "{{ host_info_softioc_group }}"
+    mode: "0664"
+
+- name: Generate IOC README file
+  ansible.builtin.template:
+    src: templates/README.md.j2
+    dest: "{{ deploy_ioc_ioc_directory }}/README.md"
     owner: "{{ host_info_softioc_user }}"
     group: "{{ host_info_softioc_group }}"
     mode: "0664"

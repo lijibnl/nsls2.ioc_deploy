@@ -1,5 +1,9 @@
 ---
 
+- name: Reload default configuration variables
+  ansible.builtin.include_vars:
+    file: defaults/main.yml
+
 - name: Make sure IOC with given name is configured on host
   ansible.builtin.fail:
     msg: "IOC with name {{ deploy_ioc_ioc_name }} is not configured on host"
@@ -12,14 +16,6 @@
 - name: Display read IOC configuration
   ansible.builtin.debug:
     msg: "{{ ioc }}"
-
-- name: Create empty default req file list
-  ansible.builtin.set_fact:
-    deploy_ioc_req_file_list: []
-
-- name: Create empty dict for dbpf list
-  ansible.builtin.set_fact:
-    deploy_ioc_dbpf_list: {}
 
 - name: Get IOC type specific default vars
   ansible.builtin.include_vars: "vars/{{ ioc.type }}.yml"

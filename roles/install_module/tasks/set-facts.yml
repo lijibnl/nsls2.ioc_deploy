@@ -8,6 +8,10 @@
   ansible.builtin.set_fact:
     install_module_config: "{{ lookup('vars', install_module_name) }}"
 
+- name: Show configuration of module being built
+  ansible.builtin.debug:
+    msg: "{{ install_module_config }}"
+
 - name: Install dependency modules recursively if needed.
   ansible.builtin.include_tasks: install-module.yml
   loop: "{{ install_module_config.module_deps }}"
@@ -15,7 +19,7 @@
     loop_var: install_module_name
   when: >-
     install_module_config.module_deps is defined and
-    install_module_name not in install_module_installed
+    install_module_name not in install_module_installed_list
 
 - name: Show already installed modules
   ansible.builtin.debug:

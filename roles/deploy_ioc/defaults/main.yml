@@ -12,11 +12,14 @@ deploy_ioc_use_common: true
 deploy_ioc_use_ad_common: true
 deploy_ioc_load_as_substitutions: true
 deploy_ioc_nextport: 4000
+deploy_ioc_req_file_list: []
+deploy_ioc_dbpf_list: {}
 
 # Autosave directory configuration
 deploy_ioc_as_dir_name: "as"
 deploy_ioc_as_directory:
   "{{ deploy_ioc_ioc_directory }}/{{ deploy_ioc_as_dir_name }}"
+deploy_ioc_make_autosave_files: false
 
 deploy_ioc_ioc_host_vars_read_token: ""
 
