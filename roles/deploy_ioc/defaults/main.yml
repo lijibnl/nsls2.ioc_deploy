@@ -3,7 +3,8 @@
 deploy_ioc_post_deploy_step: "None"
 deploy_ioc_template_root_path: "/usr/lib/epics"
 deploy_ioc_iocs_directory: "/epics/iocs"
-deploy_ioc_ioc_directory: "{{ deploy_ioc_iocs_directory }}/{{ deploy_ioc_ioc_name }}"
+deploy_ioc_ioc_directory:
+  "{{ deploy_ioc_iocs_directory }}/{{ deploy_ioc_ioc_name }}"
 deploy_ioc_executable: "softIoc"
 deploy_ioc_standard_st_cmd: true
 deploy_ioc_standard_post_init: true

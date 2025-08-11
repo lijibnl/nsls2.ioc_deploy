@@ -62,9 +62,11 @@
 
 - name: Set default compilation command
   ansible.builtin.set_fact:
-    install_module_compilation_command: "{{ install_module_default_compilation_command }}"
+    install_module_compilation_command:
+      "{{ install_module_default_compilation_command }}"
 
 - name: Override compilation command if specified by module
   ansible.builtin.set_fact:
-    install_module_compilation_command: "{{ install_module_config.compilation_command }}"
+    install_module_compilation_command:
+      "{{ install_module_config.compilation_command }}"
   when: install_module_config.compilation_command is defined
