@@ -1,5 +1,5 @@
 ---
-type: enum("advimba")
+type: enum("adsimdetector")
 
 environment:
   PREFIX: str()  # Base PV prefix
