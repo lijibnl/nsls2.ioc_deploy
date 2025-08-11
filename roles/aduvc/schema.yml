@@ -1,0 +1,5 @@
+---
+type: enum("aduvc")
+environment:
+  PREFIX: str()
+  SERIAL_NUM_OR_PRODUCT_ID: str()

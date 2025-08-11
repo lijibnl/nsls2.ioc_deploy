@@ -1,0 +1,21 @@
+---
+
+deploy_ioc_as_dir_name: autosave
+deploy_ioc_executable: pilatusApp
+deploy_ioc_required_module: adkinetix_1c03d32
+deploy_ioc_template_root_path:
+  "{{ deploy_ioc_required_module_path }}/iocs/pilatusIOC"
+deploy_ioc_use_ad_common: true
+deploy_ioc_use_common: false
+deploy_ioc_req_file_list:
+  - name: auto_settings.req
+    macros: "P=$(PREFIX)"
+deploy_ioc_device_specific_env:
+  CBUFFS: 500
+  MAX_THREADS: 8
+  NCHANS: 2048
+  PORT: PIL
+  QSIZE: 20
+  XSIZE: 495
+  YSIZE: 198
+  EPICS_DB_INCLUDE_PATH: "$(ADCORE)/db"
