@@ -8,7 +8,8 @@ deploy_ioc_template_root_path:
 deploy_ioc_use_ad_common: true
 deploy_ioc_use_common: false
 deploy_ioc_req_file_list:
-  - auto_settings.req
+  - name: auto_settings.req
+    macros: "P=$(PREFIX)"
 deploy_ioc_device_specific_env:
   CBUFFS: 500
   MAX_THREADS: 8

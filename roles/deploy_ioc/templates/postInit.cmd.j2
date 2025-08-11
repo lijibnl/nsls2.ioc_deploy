@@ -8,7 +8,7 @@ create_monitor_set("info_positions.req", 10, "")
 
 {% endif %}
 {% for reqfile in deploy_ioc_req_file_list %}
-create_monitor_set("{{ reqfile }}", 30, "")
+create_monitor_set("{{ reqfile.name }}", 30, "{{ reqfile.macros }}")
 {% endfor %}
 
 {% for dbpf in deploy_ioc_dbpf_list|dict2items %}
