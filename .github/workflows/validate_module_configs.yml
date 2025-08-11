@@ -62,7 +62,7 @@ jobs:
   run_validation_of_example_configs:
     name: Validate example configs
     runs-on: ubuntu-latest
-    needs: run_device_specific_vars_files_validation
+    needs: run_device_specific_role_validation
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
