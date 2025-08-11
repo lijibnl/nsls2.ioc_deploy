@@ -8,5 +8,5 @@ admerlin_399508f:
   module_deps:
     - adcore_60080dc
     - adcompvision_9750d13
-    - adpluginbar_567847d
+    - adpluginbar_448d96b
     - ffmpeg_server_07c570f
