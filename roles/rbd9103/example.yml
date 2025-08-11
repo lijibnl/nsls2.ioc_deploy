@@ -17,8 +17,8 @@ rbd9103-01:
       - filepath: "$(RBD9103)/db/rbd9103_recording.template"
         pattern: ["P", "R", "PORT"]
         instances:
-          - ["XF:31ID1-ES", "{RBD9103-AMM:1}", "RBD9103"]
-      - filepath: "$(EPICS_BASE)/db/asynRecord.db"
+          - ["XF:31ID1-ES", "{RBD9103-AMM:1}", "RBD"]
+      - filepath: "$(ASYN)/db/asynRecord.db"
         pattern: ["P", "R", "PORT", "ADDR", "OMAX", "IMAX"]
         instances:
           - ["XF:31ID1-ES", "{RBD9103-AMM:1}AsynIO", "RBD_TTY", "0", "0", "0"]
