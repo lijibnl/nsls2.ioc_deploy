@@ -1,5 +1,9 @@
 ---
 
+- name: Reload default configuration variables
+  ansible.builtin.include_vars:
+    file: defaults/main.yml
+
 - name: Make sure IOC with given name is configured on host
   ansible.builtin.fail:
     msg: "IOC with name {{ deploy_ioc_ioc_name }} is not configured on host"
@@ -87,16 +91,13 @@
     deploy_ioc_executable: "{{ ioc.executable }}"
   when: ioc.executable is defined
 
-- name: Get IOC installation directory from env
-  ansible.builtin.set_fact:
-    deploy_ioc_iocs_directory: "{{ deploy_ioc_merged_env.IOC_DIR }}"
-
-- name: Set IOC directory
-  ansible.builtin.set_fact:
-    deploy_ioc_ioc_directory:
-      "{{ deploy_ioc_iocs_directory }}/{{ deploy_ioc_ioc_name }}"
-
 - name: Get list of substitution files
   ansible.builtin.set_fact:
     substitutions: "{{ ioc.substitutions }}"
   when: ioc.substitutions is defined
+
+- name: Merge any ioc specific dbpf entries
+  ansible.builtin.set_fact:
+    deploy_ioc_dbpf_list:
+      "{{ deploy_ioc_dbpf_list | combine(ioc.dbpf) }}"
+  when: ioc.dbpf is defined

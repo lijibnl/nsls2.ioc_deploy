@@ -7,12 +7,12 @@
 - name: Make deploymnent list all IOCs if requested
   ansible.builtin.set_fact:
     deploy_ioc_ioc_list: "{{ host_info_ioc_list }}"
-  when: deploy_ioc_request == "all"
+  when: deploy_ioc_target == "all"
 
 - name: Set deploy iocs to specified IOCs if requested
   ansible.builtin.set_fact:
-    deploy_ioc_ioc_list: "{{ deploy_ioc_request.split(',') }}"
-  when: deploy_ioc_request != "all"
+    deploy_ioc_ioc_list: "{{ deploy_ioc_target.split(',') }}"
+  when: deploy_ioc_target != "all"
 
 - name: Show list of IOCs
   ansible.builtin.debug:

@@ -1,7 +1,7 @@
 ---
 
 install_module_install_dir: /epics/modules
-install_module_compilation_command: "make -sj"
+install_module_default_compilation_command: "make -sj"
 install_module_force_reinstall: false
 install_module_default_pkg_deps:
   - epics-bundle

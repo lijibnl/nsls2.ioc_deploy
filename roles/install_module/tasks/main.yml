@@ -7,6 +7,7 @@
 - name: Create top level list to track installed modules
   ansible.builtin.set_fact:
     install_module_installed: {}
+    install_module_installed_list: []
 
 - name: Install modules
   ansible.builtin.include_tasks: install-module.yml

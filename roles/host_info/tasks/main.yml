@@ -11,23 +11,23 @@
 
 - name: Get IOC user if specified
   ansible.builtin.set_fact:
-    host_info_softioc_user: "{{ host_config.softioc_user }}"
-  when: host_config.softioc_user is defined
+    host_info_softioc_user: "{{ host_config.host_softioc_user }}"
+  when: host_config.host_softioc_user is defined
 
 - name: Set a default IOC user if not specified
   ansible.builtin.set_fact:
     host_info_softioc_user: "softioc"
-  when: host_config.softioc_user is not defined
+  when: host_config.host_softioc_user is not defined
 
 - name: Get IOC group if specified
   ansible.builtin.set_fact:
-    host_info_softioc_group: "{{ host_config.softioc_group }}"
-  when: host_config.softioc_group is defined
+    host_info_softioc_group: "{{ host_config.host_softioc_group }}"
+  when: host_config.host_softioc_group is defined
 
 - name: Set a default IOC group if not specified
   ansible.builtin.set_fact:
     host_info_softioc_group: "n2sn-instadmin"
-  when: host_config.softioc_group is not defined
+  when: host_config.host_softioc_group is not defined
 
 - name: Create common directory if it does not exist
   ansible.builtin.file:
