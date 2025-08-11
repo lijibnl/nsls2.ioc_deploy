@@ -15,8 +15,13 @@ install_module_default_epics_deps:
   STREAM: /usr/lib/epics
   SNCSEQ: /usr/lib/epics
   RECCASTER: /usr/lib/epics
+  MOTOR: /usr/lib/epics
   EPICS_BASE: /usr/lib/epics # By default, use EPICS bundle location
 install_module_default_config_dict:
+  # Don't allow EPICS to check release files.
+  # It doesn't work well with our overrides of RELEASE.local
+  CHECK_RELEASE: 'NO'
+  # Build example IOCs by default
   BUILD_IOCS: 'YES'
 install_module_ad_config_dict:
   WITH_BOOST: 'NO'
