@@ -1,10 +1,10 @@
 ---
 dg645:
-  type: "stanforddg645"
+  type: "stanford_dg645"
   environment:
     ENGINEER: "A. Haque"
     IP: "192.168.150.10"
-    IP_PORT: "5025"
+    IP_PORT: 5025
     P: "XF:31ID1-ES"
     R: "{Dly:1}"
   substitutions:
