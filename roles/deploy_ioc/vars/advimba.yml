@@ -16,5 +16,7 @@ deploy_ioc_device_specific_env:
   NCHANS: 2048
   CBUFFS: 500
   MAX_THREADS: 8
+  XSIZE: 1920
+  YSIZE: 1080
   GENICAM_GENTL64_PATH: "$(ADVIMBA)/bin/linux-x86_64"
   EPICS_DB_INCLUDE_PATH: "$(ADCORE)/db:$(ADGENICAM)/db"
