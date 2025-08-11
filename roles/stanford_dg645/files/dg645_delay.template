@@ -35,7 +35,6 @@ record (calcout, "$(Sys)$(Dev)Calc1_"){
     field(INPA, "$(Sys)$(Dev)DO:Rel-Sel NPP MS")
     field(INPB, "$(Sys)$(Dev)DO:Dly-SP NPP MS")
     field(CALC, "0")
-    field(DTYP, "stream")
     field(OUT, "@dg645.proto writeDelay($(CHAN)) $(PORT)")
 }
 
