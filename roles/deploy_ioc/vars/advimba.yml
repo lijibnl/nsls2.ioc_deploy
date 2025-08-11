@@ -6,7 +6,7 @@ deploy_ioc_template_root_path: "{{ deploy_ioc_required_module_path }}"
 deploy_ioc_required_module: advimba_34686fe
 deploy_ioc_use_common: false
 deploy_ioc_use_ad_common: true
-deploy_ioc_req_files:
+deploy_ioc_req_file_list:
   - "auto_settings.req"
 deploy_ioc_device_specific_env:
   PORT: "VMB1"
