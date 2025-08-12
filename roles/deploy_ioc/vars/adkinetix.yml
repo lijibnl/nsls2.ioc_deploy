@@ -6,7 +6,6 @@ deploy_ioc_required_module: adkinetix_1c03d32
 deploy_ioc_template_root_path:
   "{{ deploy_ioc_required_module_path }}/iocs/kinetixIOC"
 deploy_ioc_use_ad_common: true
-deploy_ioc_use_common: false
 deploy_ioc_req_file_list:
   - name: auto_settings.req
     macros: "P=$(PREFIX)"
@@ -18,4 +17,5 @@ deploy_ioc_device_specific_env:
   QSIZE: 20
   XSIZE: 3200
   YSIZE: 3200
+  NELEMENTS: 500000
   EPICS_DB_INCLUDE_PATH: "$(ADCORE)/db"
