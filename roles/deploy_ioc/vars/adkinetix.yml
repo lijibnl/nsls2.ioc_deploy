@@ -17,4 +17,5 @@ deploy_ioc_device_specific_env:
   QSIZE: 20
   XSIZE: 3200
   YSIZE: 3200
+  NELEMENTS: 500000
   EPICS_DB_INCLUDE_PATH: "$(ADCORE)/db"
