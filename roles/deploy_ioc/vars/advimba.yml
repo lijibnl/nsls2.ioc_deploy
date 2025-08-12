@@ -5,7 +5,6 @@ deploy_ioc_as_dir_name: "autosave"
 deploy_ioc_template_root_path:
   "{{ deploy_ioc_required_module_path }}/iocs/vimbaIOC"
 deploy_ioc_required_module: advimba_34686fe
-deploy_ioc_use_common: false
 deploy_ioc_use_ad_common: true
 deploy_ioc_req_file_list:
   - name: auto_settings.req
@@ -18,5 +17,6 @@ deploy_ioc_device_specific_env:
   MAX_THREADS: 8
   XSIZE: 1920
   YSIZE: 1080
+  NELEMENTS: 500000
   GENICAM_GENTL64_PATH: "$(ADVIMBA)/bin/linux-x86_64"
   EPICS_DB_INCLUDE_PATH: "$(ADCORE)/db:$(ADGENICAM)/db"

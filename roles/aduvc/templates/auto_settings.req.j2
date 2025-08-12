@@ -1,4 +1,4 @@
-file "vimba_settings.req",                P=$(P),  R=cam1:
+file "ADUVC_settings.req",                P=$(P),  R=cam1:
 file "commonPlugin_settings.req",         P=$(P)
 {% if deploy_ioc_merged_env.FFMPEGSERVER is defined and ioc.environment.FFMSTREAM_PORT is defined%}
 file "ffmpegServer_settings.req",         P=$(P),  R=ffmstream1:
