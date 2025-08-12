@@ -2,7 +2,7 @@
 type: enum("sr570")
 environment:
   DEVICE_IP: ip()
-  DEVICE_PORT: int(min=4000)
+  DEVICE_PORT: int()
   SYS: str()  # Base PV prefix
   DEV: str()
   ENGINEER: str(required=False)
