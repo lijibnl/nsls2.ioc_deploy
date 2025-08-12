@@ -28,7 +28,7 @@
         # yamllint disable rule:line-length
         cmd: find -maxdepth 2 -name config -type f -exec cat {} \; | grep ^PORT | awk -F '=' '{print($2)}' | sort -n | tail -1 # noqa: risky-shell-pipe
         # yamllint enable rule:line-length
-        chdir: "{{ deploy_ioc_iocs_directory }}/{{ deploy_ioc_ioc_name }}"
+        chdir: "{{ deploy_ioc_iocs_directory }}"
       register: deploy_ioc_current_max_port
       changed_when: deploy_ioc_current_max_port.rc == 0
 
