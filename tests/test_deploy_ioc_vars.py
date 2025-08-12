@@ -16,6 +16,7 @@ OPTIONAL_KEYS: dict[str, type] = {
     "deploy_ioc_required_module": str,
     "deploy_ioc_use_ad_common": bool,
     "deploy_ioc_req_file_list": list,
+    "deploy_ioc_make_autosave_files": bool,
 }
 
 DEPLOY_IOC_VARS_FILES = [
