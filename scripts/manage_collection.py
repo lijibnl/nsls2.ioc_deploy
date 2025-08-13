@@ -193,7 +193,7 @@ def add_role():
             use_ad = questionary.confirm(
                 "Is this role for an areaDetector IOC?", default=False
             ).unsafe_ask()
-            ioc_type_config["deploy_ioc_use_common_ad"] = use_ad
+            ioc_type_config["deploy_ioc_use_ad_common"] = use_ad
         required_module = questionary.select(
             "Select the required module for this IOC type:",
             choices=get_module_list() + ["new"],

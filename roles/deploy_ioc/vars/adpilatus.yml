@@ -1,5 +1,5 @@
 ---
-deploy_ioc_use_common_ad: true
+deploy_ioc_use_ad_common: true
 deploy_ioc_required_module: adpilatus_af15230
 deploy_ioc_executable: pilatusDetectorApp
 deploy_ioc_as_dir_name: autosave
