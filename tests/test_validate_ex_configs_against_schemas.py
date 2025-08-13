@@ -1,4 +1,5 @@
 import os
+import re
 
 import pytest
 import yamale
@@ -13,6 +14,26 @@ COMMON_ROLES = [
 ]
 
 DEVICE_ROLES = [role for role in os.listdir("roles") if role not in COMMON_ROLES]
+
+
+class HostnameValidator(yamale.validators.Validator):
+    tag = "hostname"
+
+    def _is_valid(self, value):
+        if value[-1] == ".":
+            # strip exactly one dot from the right, if present
+            value = value[:-1]
+        if len(value) > 253:
+            return False
+
+        labels = value.split(".")
+
+        # the TLD must be not all-numeric
+        if re.match(r"[0-9]+$", labels[-1]):
+            return False
+
+        allowed = re.compile(r"(?!-)[a-z0-9-]{1,63}(?<!-)$", re.IGNORECASE)
+        return all(allowed.match(label) for label in labels)
 
 
 class IOCTypeValidator(yamale.validators.Validator):
@@ -64,7 +85,10 @@ def test_ensure_example_validates_with_role_specific_schema(device_role):
     schema_path = os.path.join("roles", device_role, "schema.yml")
     example_path = os.path.join("roles", device_role, "example.yml")
 
-    schema = yamale.make_schema(schema_path)
+    validators = yamale.validators.DefaultValidators.copy()
+    validators["hostname"] = HostnameValidator
+
+    schema = yamale.make_schema(schema_path, validators=validators)
 
     with open(example_path) as fp:
         example_data = yaml.safe_load(fp)
