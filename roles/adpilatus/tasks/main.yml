@@ -18,7 +18,6 @@
     group: "{{ host_info_softioc_group }}"
     mode: "0664"
 
-
 - name: Create NFS mount if ramdisk path is specified
   when: ioc.ramdisk_path is defined
   block:
