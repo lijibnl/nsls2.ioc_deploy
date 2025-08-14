@@ -11,14 +11,14 @@ import yaml
 
 def get_module_list():
     return [
-        f.split(".", -1)[0]
+        os.path.splitext(f)[0]
         for f in os.listdir(os.path.join("roles", "install_module", "vars"))
     ]
 
 
 def get_role_list():
     return [
-        f.split(".", -1)[0]
+        os.path.splitext(f)[0]
         for f in os.listdir(os.path.join("roles", "deploy_ioc", "vars"))
     ]
 
@@ -84,7 +84,7 @@ def update_module():
 
     old_module_name_ver = list(old_module_config.keys())[0]
     module_config = old_module_config[old_module_name_ver]
-    module_base_name = old_module_name_ver.split("_", -1)[0]
+    module_base_name = old_module_name_ver.rsplit("_", 1)[0]
     module_config["version"] = new_version
     new_module_name_ver = f"{module_base_name}_{new_version}"
     new_module_config = {new_module_name_ver: module_config}
@@ -140,13 +140,13 @@ def delete_module():
             module_config = yaml.safe_load(f)
             module_name_ver = list(module_config.keys())[0]
             if module in module_config[module_name_ver]["module_deps"]:
-                dependant_modules.append(file.split(".", -1)[0])
+                dependant_modules.append(os.path.splitext(file)[0])
 
     for file in os.listdir(os.path.join("roles", "deploy_ioc", "vars")):
         with open(os.path.join("roles", "deploy_ioc", "vars", file)) as f:
             ioc_config = yaml.safe_load(f)
             if ioc_config["deploy_ioc_required_module"] == module:
-                dependant_ioc_types.append(file.split(".", -1)[0])
+                dependant_ioc_types.append(os.path.splitext(file)[0])
     if dependant_modules or dependant_ioc_types:
         raise RuntimeError(
             f"Cannot delete {module} as it is required by the following modules: ",
