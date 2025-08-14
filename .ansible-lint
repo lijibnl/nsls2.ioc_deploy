@@ -1,5 +1,8 @@
 ---
 
+mock_modules:
+  - ansible.posix.mount # For some reason ansible lint doesn't find this
+
 exclude_paths:
   - ".github/workflows/super-linter.yml"
   # Be more flexible for install module vars, since they are based
