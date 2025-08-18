@@ -1,0 +1,18 @@
+---
+# Example playbook for deploying Germanium detector IOCs
+# This playbook demonstrates how to use the nsls2.ioc_deploy collection
+# with the GermaniumIOC repository
+
+- name: Deploy Germanium Detector IOCs
+  hosts: ioc_hosts
+  gather_facts: true
+  vars:
+    # Load host configuration from a separate config repository
+    host_config: "{{ lookup('file', 'host-config.yml') | from_yaml }}"
+    # Deploy all IOCs configured for this host, or specify specific IOCs:
+    # deploy_ioc_target: "germanium-01,germanium-02"
+    deploy_ioc_target: "all"
+  
+  roles:
+    - nsls2.ioc_deploy.deploy_ioc
+

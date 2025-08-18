@@ -1,0 +1,63 @@
+---
+# Example host configuration for Germanium detector IOCs
+# This file would typically be stored in a separate configuration repository
+# and loaded by the playbook
+
+# Host-specific configuration
+host_softioc_user: "softioc"
+host_softioc_group: "n2sn-instadmin"
+host_epics_intf: "192.168.1.50"  # EPICS interface IP
+
+# IOC configurations
+germanium-01:
+  type: germanium
+  environment:
+    ENGINEER: "Dr. Smith"
+    PREFIX: "XF:31ID1-ES{GE:01}"
+    SYS: "XF:31ID1-ES"
+    DEV: "GE:01"
+    PORT: "GE01"
+    IP: "192.168.1.100"
+    RING_SIZE: "32768"
+    DEVICE_IP: "192.168.1.100"
+    DEVICE_SN: "GE001"
+  substitutions:
+    quadEM_nsls2em:
+      - filepath: "quadEM_nsls2em.template"
+        pattern: ["P=$(SYS)", "R={$(DEV)}", "PORT=$(PORT)", "ADDR=0", "TIMEOUT=1"]
+        instances: [["XF:31ID1-ES", "GE:01", "GE01", "0", "1"]]
+    nsls2em_RevD:
+      - filepath: "nsls2em_RevD.template"
+        pattern: ["P=$(SYS)", "R={$(DEV)}", "PORT=$(PORT)", "ADDR=0", "TIMEOUT=1"]
+        instances: [["XF:31ID1-ES", "GE:01", "GE01", "0", "1"]]
+    nsls2em_pscdrv:
+      - filepath: "nsls2em_pscdrv.template"
+        pattern: ["PriSys=$(SYS)", "PSC=$(DEV)"]
+        instances: [["XF:31ID1-ES", "GE:01"]]
+
+germanium-02:
+  type: germanium
+  environment:
+    ENGINEER: "Dr. Johnson"
+    PREFIX: "XF:31ID1-ES{GE:02}"
+    SYS: "XF:31ID1-ES"
+    DEV: "GE:02"
+    PORT: "GE02"
+    IP: "192.168.1.101"
+    RING_SIZE: "32768"
+    DEVICE_IP: "192.168.1.101"
+    DEVICE_SN: "GE002"
+  substitutions:
+    quadEM_nsls2em:
+      - filepath: "quadEM_nsls2em.template"
+        pattern: ["P=$(SYS)", "R={$(DEV)}", "PORT=$(PORT)", "ADDR=0", "TIMEOUT=1"]
+        instances: [["XF:31ID1-ES", "GE:02", "GE02", "0", "1"]]
+    nsls2em_RevD:
+      - filepath: "nsls2em_RevD.template"
+        pattern: ["P=$(SYS)", "R={$(DEV)}", "PORT=$(PORT)", "ADDR=0", "TIMEOUT=1"]
+        instances: [["XF:31ID1-ES", "GE:02", "GE02", "0", "1"]]
+    nsls2em_pscdrv:
+      - filepath: "nsls2em_pscdrv.template"
+        pattern: ["PriSys=$(SYS)", "PSC=$(DEV)"]
+        instances: [["XF:31ID1-ES", "GE:02"]]
+

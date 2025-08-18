@@ -1,0 +1,33 @@
+---
+nsls2em_05e8a65:
+  name: "NSLS2EM"
+  version: "05e8a65"
+  url: "https://github.com/lijibnl/GermaniumIOC"
+  include_base_ad_config: true
+  module_deps: []
+  pkg_deps: []
+  epics_deps: ["asyn", "autosave", "busy", "calc", "sncseq", "sscan", "deviocstats", "adcore", "quadem", "pscdrv"]
+  compilation_command: "make"
+  config:
+    TOP: "/epics/iocs/$(IOC_NAME)"
+    NSLS2EM: "$(TOP)"
+    SUPPORT: "/usr/lib/epics"
+    QUADEM: "/epics/modules/quadEM"
+    IPAC: "/usr/lib/epics"
+    IPUNIDIG: "/usr/lib/epics"
+    AREA_DETECTOR: "/epics/modules"
+    ASYN: "/usr/lib/epics"
+    ADSUPPORT: "/epics/modules"
+    ADCORE: "/epics/modules/ADCore"
+    AUTOSAVE: "/usr/lib/epics"
+    BUSY: "/usr/lib/epics"
+    CALC: "/usr/lib/epics"
+    SNCSEQ: "/usr/lib/epics"
+    SSCAN: "/usr/lib/epics"
+    DEVIOCSTATS: "/usr/lib/epics"
+    EPICS_BASE: "/usr/lib/epics"
+    PSCDRV: "/epics/modules/pscdrv"
+  overwrite_release: true
+  overwrite_config_site: false
+  use_token: false
+

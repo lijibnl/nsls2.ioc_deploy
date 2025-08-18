@@ -1,0 +1,44 @@
+# Load GERMANIUM database and register device driver
+dbLoadDatabase("{{ deploy_ioc_template_root_path }}/dbd/Germanium.dbd")
+Germanium_registerRecordDeviceDriver(pdbbase)
+
+# Germanium detector specific commands
+epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
+
+# Configure asyn port for device communication
+drvAsynIPPortConfigure("IP_$(PORT)", "$(IP)", 0, 0, 0)
+asynOctetSetInputEos("IP_$(PORT)",  0, "\r\n")
+asynOctetSetOutputEos("IP_$(PORT)", 0, "\r")
+asynSetTraceIOMask("IP_$(PORT)", 0, 6)
+asynSetTraceIOTruncateSize("IP_$(PORT)", 0, 4000)
+
+# Load asynRecord
+dbLoadRecords("$(ASYN)/db/asynRecord.db","P=$(PREFIX),R=asyn1,PORT=IP_$(PORT),ADDR=0,OMAX=256,IMAX=256")
+
+# Configure GERMANIUM driver
+drvNSLS2_VEMConfigure("$(PORT)", "IP_$(PORT)", $(RING_SIZE))
+
+# Load database templates
+dbLoadRecords("$(ADCORE)/db/NDArrayBase.template", "P=$(SYS), R="{$(DEV)}", PORT=$(PORT), ADDR=0, TIMEOUT=1")
+dbLoadRecords("$(GERMANIUM)/db/germanium.template",  "P=$(SYS), R="{$(DEV)}", PORT=$(PORT), ADDR=0, TIMEOUT=1")
+
+# Load PSC driver records
+dbLoadRecords("$(GERMANIUM)/db/germanium_pscdrv.template", "PriSys=$(SYS),PSC=$(DEV)")
+
+# Load additional records
+dbLoadRecords("$(GERMANIUM)/db/Connection.db", "PriSys=$(SYS),PSC=$(DEV)")
+dbLoadRecords("$(GERMANIUM)/db/Misc.db", "PriSys=$(SYS),PSC=$(DEV)")
+
+# Load substitution files
+dbLoadTemplate ("$(GERMANIUM)/db/CommandReg.substitutions", "PriSys=$(SYS),PSC=$(DEV)")
+dbLoadTemplate ("$(GERMANIUM)/db/StatusFloatReg.substitutions", "PriSys=$(SYS),PSC=$(DEV)")
+dbLoadTemplate ("$(GERMANIUM)/db/StatusReg.substitutions", "PriSys=$(SYS),PSC=$(DEV)")
+dbLoadTemplate ("$(GERMANIUM)/db/RangeGainOffset.substitutions", "PriSys=$(SYS),PSC=$(DEV)")
+
+# Configure PSC driver
+epicsThreadSleep 1
+var(PSCDebug, 1)
+createPSC("CmdPort_$(DEV)", "$(DEVICE_IP)", 7,0)
+setPSCSendBlockSize("CmdPort_$(DEV)", 80, 1400)
+epicsThreadSleep 1
+

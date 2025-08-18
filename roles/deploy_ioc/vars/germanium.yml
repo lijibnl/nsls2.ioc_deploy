@@ -1,0 +1,15 @@
+---
+deploy_ioc_required_module: "germanium_"
+deploy_ioc_executable: "germanium"
+deploy_ioc_standard_st_cmd: true
+deploy_ioc_standard_post_init: true
+deploy_ioc_use_common: true
+deploy_ioc_use_ad_common: true
+deploy_ioc_load_as_substitutions: true
+deploy_ioc_make_autosave_files: true
+deploy_ioc_device_specific_env:
+  AREA_DETECTOR: "/epics/modules"
+  ADSUPPORT: "/epics/modules"
+  ADCORE: "/epics/modules/ADCore"
+  PSCDRV: "/epics/modules/pscdrv"
+
