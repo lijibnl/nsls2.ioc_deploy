@@ -1,23 +1,8 @@
 import os
 
 import pytest
-
-OPTIONAL_KEYS: dict[str, type] = {
-    "deploy_ioc_post_deploy_step": str,
-    "deploy_ioc_template_root_path": str,
-    "deploy_ioc_executable": str,
-    "deploy_ioc_standard_st_cmd": bool,
-    "deploy_ioc_standard_post_init": bool,
-    "deploy_ioc_use_common": bool,
-    "deploy_ioc_load_as_substitutions": bool,
-    "deploy_ioc_manage_iocs_nextport": int,
-    "deploy_ioc_as_dir_name": str,
-    "deploy_ioc_device_specific_env": dict,
-    "deploy_ioc_required_module": str,
-    "deploy_ioc_use_ad_common": bool,
-    "deploy_ioc_req_file_list": list,
-    "deploy_ioc_make_autosave_files": bool,
-}
+import yaml
+import yamale
 
 DEPLOY_IOC_VARS_FILES = [
     os.path.splitext(f)[0]
@@ -36,9 +21,12 @@ def test_deploy_ioc_var_file_has_matching_role(deploy_ioc_var_file):
 
 def test_deploy_ioc_var_files_valid(deploy_ioc_var_file):
     if deploy_ioc_var_file.data:
-        for key in deploy_ioc_var_file.data:
-            assert key in OPTIONAL_KEYS
-            assert type(deploy_ioc_var_file.data[key]) is OPTIONAL_KEYS[key]
+        data = yamale.make_data(content=yaml.dump(deploy_ioc_var_file.data))
+        schema = yamale.make_schema("schemas/device_specific_vars.yml")
+        try:
+            yamale.validate(schema, data)
+        except Exception as e:
+            pytest.fail(f"YAML validation failed: {e}")
 
 
 def test_deploy_ioc_var_file_required_module_exists(deploy_ioc_var_file):

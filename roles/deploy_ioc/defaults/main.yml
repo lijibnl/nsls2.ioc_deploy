@@ -7,7 +7,6 @@ deploy_ioc_ioc_directory:
   "{{ deploy_ioc_iocs_directory }}/{{ deploy_ioc_ioc_name }}"
 deploy_ioc_executable: "softIoc"
 deploy_ioc_standard_st_cmd: true
-deploy_ioc_standard_post_init: true
 deploy_ioc_use_common: true
 deploy_ioc_use_ad_common: false
 deploy_ioc_load_as_substitutions: true
