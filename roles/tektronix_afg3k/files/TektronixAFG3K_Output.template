@@ -1,5 +1,5 @@
 record(ai, "$(P)$(R)$(OUTPUT_NUM):Name_RBV"){
-    field(DESC, "Ouput #")
+    field(DESC, "Output #")
     field(DTYP, "Soft Channel")
     field(VAL, "$(OUTPUT_NUM)")
 }
