@@ -1,0 +1,43 @@
+---
+# Tasks for adaravis role
+
+- name: Ensure aravis rpm package is installed
+  ansible.builtin.dnf:
+    name: aravis
+    state: present
+
+- name: Set arv-tool path
+  set_fact:
+    adaravis_arv_tool: /opt/aravis/bin/arv-tool-0.8
+
+- name: Get camera model information
+  shell: "{{ adaravis_arv_tool }} -n \"{{ ioc.environment.CAMERA_NAME }}\" control DeviceModelName | sed 's/DeviceModelName = //g' | sed 's/ /_/g'"
+  register: adaravis_arv_tool_model_output
+
+- name: Set camera model name
+  set_fact:
+    adaravis_camera_model_name: "{{ adaravis_arv_tool_model_output.stdout }}"
+
+- name: Print model information
+  debug:
+    msg: "{{ adaravis_camera_model_name }}"
+
+- name: Auto generate feature databases and bob screens
+  include_tasks: autogen_files.yml
+
+
+- name: Install base startup script
+  ansible.builtin.template:
+    src: "templates/base.cmd.j2"
+    dest: "{{ deploy_ioc_ioc_directory }}/iocBoot/base.cmd"
+    owner: "{{ host_info_softioc_user }}"
+    group: "{{ host_info_softioc_group }}"
+    mode: "0664"
+
+- name: Copy autosave req file
+  ansible.builtin.template:
+    src: "templates/auto_settings.req.j2"
+    dest: "{{ deploy_ioc_as_directory }}/req/auto_settings.req"
+    owner: "{{ host_info_softioc_user }}"
+    group: "{{ host_info_softioc_group }}"
+    mode: "0664"
