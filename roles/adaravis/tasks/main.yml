@@ -7,23 +7,31 @@
     state: present
 
 - name: Set arv-tool path
-  set_fact:
+  ansible.builtin.set_fact:
     adaravis_arv_tool: /opt/aravis/bin/arv-tool-0.8
 
 - name: Get camera model information
-  shell: "{{ adaravis_arv_tool }} -n \"{{ ioc.environment.CAMERA_NAME }}\" control DeviceModelName | sed 's/DeviceModelName = //g' | sed 's/ /_/g'"
+  ansible.builtin.shell: >-
+    set -o pipefail;
+    {{ adaravis_arv_tool }} -n "{{ ioc.environment.CAMERA_NAME }}"
+    control DeviceModelName |
+    sed 's/DeviceModelName = //g' |
+    sed 's/ /_/g'
+  args:
+    executable: /bin/bash
   register: adaravis_arv_tool_model_output
+  changed_when: false
 
 - name: Set camera model name
-  set_fact:
+  ansible.builtin.set_fact:
     adaravis_camera_model_name: "{{ adaravis_arv_tool_model_output.stdout }}"
 
 - name: Print model information
-  debug:
+  ansible.builtin.debug:
     msg: "{{ adaravis_camera_model_name }}"
 
 - name: Auto generate feature databases and bob screens
-  include_tasks: autogen_files.yml
+  ansible.builtin.include_tasks: autogen_files.yml
 
 
 - name: Install base startup script

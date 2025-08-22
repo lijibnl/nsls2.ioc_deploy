@@ -1,7 +1,9 @@
+---
+
 adaravis-01:
   type: adaravis
   environment:
     ENGINEER: C. Engineer
     PREFIX: XF:31ID1-ES{ADARAVIS:01}
-    CAMERA_NAME: "Allied Vision Technologies-Manta G-040B (E0022660)-50-0503548886"
+    CAMERA_NAME: "Allied Vision-Manta G-040B (E0022660)-50-0503548886"
     ENABLE_CACHING: 1
