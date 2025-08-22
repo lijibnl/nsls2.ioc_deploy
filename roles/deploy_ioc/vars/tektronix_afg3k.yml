@@ -5,3 +5,4 @@ deploy_ioc_required_module: "base_stream_ioc_33d1fb7"
 deploy_ioc_executable: "baseStreamApp"
 deploy_ioc_device_specific_env:
   PORT: "AFG3K"
+  PREFIX: "$(P)$(R)"
