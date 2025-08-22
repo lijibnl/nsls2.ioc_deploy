@@ -6,8 +6,6 @@
     name: aravis
     state: present
 
-- name: Set arv-tool path
-  ansible.builtin.set_fact:
 - name: Find arv-tool executable
   ansible.builtin.find:
     paths: /opt/aravis/bin/
@@ -16,8 +14,10 @@
   register: arv_tool_search
 
 - name: Set arv-tool path fact
-  set_fact:
-    adaravis_arv_tool: "{{ arv_tool_search.files[0].path if arv_tool_search.matched > 0 else '/opt/aravis/bin/arv-tool-0.8' }}"
+  ansible.builtin.set_fact:
+    adaravis_arv_tool: >-
+      {{ arv_tool_search.files[0].path if arv_tool_search.matched > 0
+      else '/opt/aravis/bin/arv-tool-0.8' }}
 
 - name: Get camera model information
   ansible.builtin.shell: >-
