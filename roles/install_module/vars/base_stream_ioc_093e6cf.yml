@@ -1,6 +1,5 @@
 ---
-
-base_stream_ioc_33d1fb7:
+base_stream_ioc_093e6cf:
   name: BaseStreamIOC
   url: https://github.com/NSLS2/BaseStreamDevice
-  version: 33d1fb7
+  version: 093e6cf
