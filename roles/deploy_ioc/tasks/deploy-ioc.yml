@@ -123,7 +123,7 @@
         name: nsls2.ioc_deploy.manage_iocs
       vars:
         manage_iocs_command: "install"
-        manage_iocs_deploy_ioc_ioc_name: "{{ deploy_ioc_ioc_name }}"
+        manage_iocs_subcommand: "{{ deploy_ioc_ioc_name }}"
       when:
         - deploy_ioc_post_deploy_step == "Install" or
           deploy_ioc_post_deploy_step == "Install and Enable" or
@@ -135,7 +135,7 @@
         name: manage_iocs
       vars:
         manage_iocs_command: "enable"
-        manage_iocs_deploy_ioc_ioc_name: "{{ deploy_ioc_ioc_name }}"
+        manage_iocs_subcommand: "{{ deploy_ioc_ioc_name }}"
       when:
         - deploy_ioc_post_deploy_step == "Install and Enable" or
           deploy_ioc_post_deploy_step == "Install and Enable and Start"
@@ -145,7 +145,7 @@
         name: manage_iocs
       vars:
         manage_iocs_command: "restart"
-        manage_iocs_deploy_ioc_ioc_name: "{{ deploy_ioc_ioc_name }}"
+        manage_iocs_subcommand: "{{ deploy_ioc_ioc_name }}"
       when:
         - deploy_ioc_post_deploy_step == "Restart" or
           deploy_ioc_post_deploy_step == "Install and Start" or
