@@ -1,9 +1,9 @@
 import os
+import re
 
 import pytest
-import yaml
 import yamale
-import re
+import yaml
 
 REQUIRED_KEYS: dict[str, type] = {
     "name": str,
@@ -41,13 +41,14 @@ class URLValidator(yamale.validators.Validator):
 
     def _is_valid(self, value: str) -> bool:
         return value.startswith("http://") or value.startswith("https://")
-    
+
 
 class ModuleNameValidator(yamale.validators.Validator):
     tag = "module_name"
 
     def _is_valid(self, value: str) -> bool:
         return value in INSTALL_MODULE_FILES
+
 
 class GitCommitHashValidator(yamale.validators.Validator):
     """
@@ -56,18 +57,20 @@ class GitCommitHashValidator(yamale.validators.Validator):
     This regex checks for 7 to 40 hexadecimal characters.
     The 're.IGNORECASE' flag makes the match case-insensitive for hex characters.
     """
-    
+
     tag = "git_commit_hash"
 
     def _is_valid(self, value: str) -> bool:
-        return bool(re.fullmatch(r'^[0-9a-fA-F]{7,40}$', value))
+        return bool(re.fullmatch(r"^[0-9a-fA-F]{7,40}$", value))
 
 
 def test_install_module_vars_files_valid(install_module_var_file):
     assert len(list(install_module_var_file.data.keys())) == 1
     assert list(install_module_var_file.data.keys())[0] == install_module_var_file.name
 
-    install_module_config_data = install_module_var_file.data[install_module_var_file.name]
+    install_module_config_data = install_module_var_file.data[
+        install_module_var_file.name
+    ]
 
     validators = yamale.validators.DefaultValidators.copy()
     validators["url"] = URLValidator
@@ -75,8 +78,12 @@ def test_install_module_vars_files_valid(install_module_var_file):
     validators["git_commit_hash"] = GitCommitHashValidator
 
     data = yamale.make_data(content=yaml.dump(install_module_config_data))
-    default_schema = yamale.make_schema("schemas/install_module.yml", validators=validators)
-    latest_schema = yamale.make_schema("schemas/install_module_latest.yml", validators=validators)
+    default_schema = yamale.make_schema(
+        "schemas/install_module.yml", validators=validators
+    )
+    latest_schema = yamale.make_schema(
+        "schemas/install_module_latest.yml", validators=validators
+    )
     try:
         if install_module_var_file.name.endswith("_latest"):
             yamale.validate(latest_schema, data, strict=False)
@@ -84,8 +91,10 @@ def test_install_module_vars_files_valid(install_module_var_file):
             yamale.validate(default_schema, data, strict=False)
     except Exception as e:
         pytest.fail(
-            f"Module var file for {install_module_var_file.name} role doesn't conform to the schema: {e}"
+            f"roles/install_module/vars/{install_module_var_file.name}.yml "
+            f"doesn't conform to the schema: {e}"
         )
+
 
 def test_install_module_vars_files_all_module_deps_exist(
     install_module_var_file,

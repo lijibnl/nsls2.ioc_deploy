@@ -1,8 +1,8 @@
 import os
 
 import pytest
-import yaml
 import yamale
+import yaml
 
 DEPLOY_IOC_VARS_FILES = [
     os.path.splitext(f)[0]
@@ -21,6 +21,7 @@ pytestmark = pytest.mark.parametrize(
     "deploy_ioc_var_file", DEPLOY_IOC_VARS_FILES, indirect=True
 )
 
+
 class ModuleNameValidator(yamale.validators.Validator):
     tag = "module_name"
 
@@ -37,7 +38,9 @@ def test_deploy_ioc_var_files_valid(deploy_ioc_var_file):
         data = yamale.make_data(content=yaml.dump(deploy_ioc_var_file.data))
         validators = yamale.validators.DefaultValidators.copy()
         validators["module_name"] = ModuleNameValidator
-        schema = yamale.make_schema("schemas/device_specific_vars.yml", validators=validators)
+        schema = yamale.make_schema(
+            "schemas/device_specific_vars.yml", validators=validators
+        )
         try:
             yamale.validate(schema, data)
         except Exception as e:
