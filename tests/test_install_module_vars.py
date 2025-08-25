@@ -110,6 +110,6 @@ def test_ensure_version_suffixed_unless_latest(install_module_var_file):
     install_module_config = install_module_var_file.data[install_module_var_file.name]
 
     if install_module_var_file.name.endswith("_latest"):
-        pytest.skip("Allow ")
+        pytest.skip("Allow latest versions to skip version suffix validation")
     else:
         assert install_module_var_file.name.endswith(install_module_config["version"])
