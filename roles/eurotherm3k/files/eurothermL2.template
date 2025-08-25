@@ -269,7 +269,7 @@ record(ao, "$(SYS)$(DEV)LOOP2:LBT")
 
 record(ai, "$(SYS)$(DEV)LOOP2:LBT:RBV")
 {
-    field(DESC, "proportional param")
+    field(DESC, "Loop Break Time")
     field(DTYP, "asynInt32")
     field(INP,  "@asyn($(modbus_prefix)_MASTER_RX,1107,1000)MODBUS_DATA")
     field(PREC, "0")
