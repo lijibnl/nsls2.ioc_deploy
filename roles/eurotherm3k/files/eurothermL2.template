@@ -262,7 +262,7 @@ record(ao, "$(SYS)$(DEV)LOOP2:LBT")
     field(DESC, "Loop Break Time")
     field(DTYP, "asynInt32")
     field(OUT,  "@asyn($(modbus_prefix)_MASTER_TX,1107,1000)MODBUS_DATA")
-    field(FLNK, "$(SYS)$(DEV)LOOP1:LBT:RBV")
+    field(FLNK, "$(SYS)$(DEV)LOOP2:LBT:RBV")
     field(PREC, "0")
     field(SDIS, "$(SYS)$(DEV)DISABLE")
 }
