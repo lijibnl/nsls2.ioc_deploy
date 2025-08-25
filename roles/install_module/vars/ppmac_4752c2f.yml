@@ -5,4 +5,4 @@ ppmac_4752c2f:
   url: https://github.com/NSLS-II/ppmac
   version: 4752c2f
   module_deps:
-    - pmac_2_6_5
+    - pmac_f811ee1
