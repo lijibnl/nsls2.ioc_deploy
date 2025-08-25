@@ -1,4 +1,4 @@
-# Datadase to select mode / receipe
+# Database to select mode / recipe
 
 record(mbbo, "$(SYS)$(DEV)RECSEL")
 {
