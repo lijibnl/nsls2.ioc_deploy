@@ -23,7 +23,6 @@ OPTIONAL_KEYS: dict[str, type] = {
     "use_token": bool,
 }
 
-
 INSTALL_MODULE_FILES = [
     os.path.splitext(f)[0]
     for f in os.listdir("roles/install_module/vars")
@@ -43,13 +42,6 @@ class URLValidator(yamale.validators.Validator):
         return value.startswith("http://") or value.startswith("https://")
 
 
-class ModuleNameValidator(yamale.validators.Validator):
-    tag = "module_name"
-
-    def _is_valid(self, value: str) -> bool:
-        return value in INSTALL_MODULE_FILES
-
-
 class GitCommitHashValidator(yamale.validators.Validator):
     """
     A Git commit hash typically consists of 7 hexadecimal characters.
@@ -64,7 +56,9 @@ class GitCommitHashValidator(yamale.validators.Validator):
         return bool(re.fullmatch(r"^[0-9a-fA-F]{7,40}$", value))
 
 
-def test_install_module_vars_files_valid(install_module_var_file):
+def test_install_module_vars_files_valid(
+    install_module_var_file, module_name_validator
+):
     assert len(list(install_module_var_file.data.keys())) == 1
     assert list(install_module_var_file.data.keys())[0] == install_module_var_file.name
 
@@ -74,7 +68,7 @@ def test_install_module_vars_files_valid(install_module_var_file):
 
     validators = yamale.validators.DefaultValidators.copy()
     validators["url"] = URLValidator
-    validators["module_name"] = ModuleNameValidator
+    validators["module_name"] = module_name_validator
     validators["git_commit_hash"] = GitCommitHashValidator
 
     data = yamale.make_data(content=yaml.dump(install_module_config_data))

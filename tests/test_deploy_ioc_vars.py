@@ -22,22 +22,15 @@ pytestmark = pytest.mark.parametrize(
 )
 
 
-class ModuleNameValidator(yamale.validators.Validator):
-    tag = "module_name"
-
-    def _is_valid(self, value: str) -> bool:
-        return value in INSTALL_MODULE_FILES
-
-
 def test_deploy_ioc_var_file_has_matching_role(deploy_ioc_var_file):
     assert os.path.exists(os.path.join("roles", deploy_ioc_var_file.name))
 
 
-def test_deploy_ioc_var_files_valid(deploy_ioc_var_file):
+def test_deploy_ioc_var_files_valid(deploy_ioc_var_file, module_name_validator):
     if deploy_ioc_var_file.data:
         data = yamale.make_data(content=yaml.dump(deploy_ioc_var_file.data))
         validators = yamale.validators.DefaultValidators.copy()
-        validators["module_name"] = ModuleNameValidator
+        validators["module_name"] = module_name_validator
         schema = yamale.make_schema(
             "schemas/device_specific_vars.yml", validators=validators
         )
