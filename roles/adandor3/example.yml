@@ -1,12 +1,10 @@
 andor-marana-test:
   required_module: "ADAndor3"
-  type: "ADAndor3"
+  type: "adandor3"
   
   ioc_template_root_path: /epics/modules/ADAndor3/iocs/andor3IOC
 
   environment:
 
-    ADANDOR3: "/epics/modules/ADAndor3"
-    ADCORE: "/epics/modules/ADCore_R3_13"
     PREFIX: "XF:18IDB-ES{Det:Marana1}"
     ENGINEER: "C. Engineer"

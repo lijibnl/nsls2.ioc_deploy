@@ -3,7 +3,7 @@
 - name: Install common startup files
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ iocs_directory }}/{{ ioc_name }}/iocBoot"
+    dest: "{{ deploy_ioc_ioc_directory }}/iocBoot"
     owner: "{{ softioc_user }}"
     group: "{{ softioc_group }}"
     mode: "0664"
