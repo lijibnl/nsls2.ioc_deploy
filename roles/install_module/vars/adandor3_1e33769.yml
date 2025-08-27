@@ -1,0 +1,6 @@
+adandor3_1e33769:
+  name: ADAndor3
+  version: 1e33769
+  url: https://github.com/areaDetector/adandor3
+  include_base_ad_config: true
+  module_deps: []
