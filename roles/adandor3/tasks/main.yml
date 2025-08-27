@@ -1,0 +1,26 @@
+---
+
+- name: Install common startup files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ iocs_directory }}/{{ ioc_name }}/iocBoot"
+    owner: "{{ softioc_user }}"
+    group: "{{ softioc_group }}"
+    mode: "0664"
+  with_fileglob: "files/*.cmd"
+
+- name: Copy base.cmd
+  ansible.builtin.template:
+    src: "templates/base.cmd.j2"
+    dest: "{{ iocs_directory }}/{{ ioc_name }}/iocBoot/base.cmd"
+    owner: "{{ softioc_user }}"
+    group: "{{ softioc_group }}"
+    mode: "0664"
+
+- name: Copy autosave req file
+  ansible.builtin.copy:
+    src: "files/auto_settings.req"
+    dest: "{{ iocs_directory }}/{{ ioc_name }}/autosave/req/auto_settings.req"
+    owner: "{{ softioc_user }}"
+    group: "{{ softioc_group }}"
+    mode: "0664"
