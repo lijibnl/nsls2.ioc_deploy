@@ -1,0 +1,7 @@
+---
+
+adpicam-01:
+  type: adpicam
+  environment:
+    ENGINEER: C. Engineer
+    PREFIX: XF:31ID1-ES{ADPICAM:01}
