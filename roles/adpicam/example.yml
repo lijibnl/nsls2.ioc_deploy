@@ -2,7 +2,6 @@
 
 adpicam-01:
   type: adpicam
-  ioc_template_root_path: /epics/modules/ADPICam/iocs/PICamIOC
   environment:
     ENGINEER: C. Engineer
     PREFIX: XF:31ID1-ES{ADPICAM:01}
