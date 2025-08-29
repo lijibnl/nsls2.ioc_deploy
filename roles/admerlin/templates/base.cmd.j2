@@ -36,6 +36,3 @@ dbLoadRecords("$(ADMERLIN)/db/merlin.template","P=$(PREFIX),R=cam1:,PORT=$(PORT)
 
 set_requestfile_path("$(ADMERLIN)/merlinApp/Db")
 
-# Additional records for the IOC
-dbLoadRecords("$(DEVIOCSTATS)/db/iocAdminSoft.db", "IOC=$(PREFIX)")
-dbLoadRecords("$(AUTOSAVE)/db/save_restoreStatus.db", "P=$(PREFIX)")
