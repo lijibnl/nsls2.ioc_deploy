@@ -1,6 +1,6 @@
 errlogInit(20000)
 
-dbLoadDatabase("{{ deploy_ioc_required_module_path }}/dbd/{{ deploy_ioc_executable }}.dbd")
+dbLoadDatabase("{{ deploy_ioc_required_module_path }}/iocs/kinetixIOC/dbd/{{ deploy_ioc_executable }}.dbd")
 {{ deploy_ioc_executable }}_registerRecordDeviceDriver(pdbbase)
 
 ADKinetixConfig(0, "$(PORT)")
@@ -12,3 +12,4 @@ asynSetTraceIOMask($(PORT), 0, 2)
 
 # Main database
 dbLoadRecords("$(ADKINETIX)/db/ADKinetix.template", "P=$(PREFIX),R=cam1:,PORT=$(PORT)")
+set_requestfile_path("$(ADKINETIX)/db")
