@@ -10,7 +10,7 @@ admerlin_local_intf_ip: ip(required=False)
 environment:
   ENGINEER: str()
   PREFIX: str()
-  MERLIN_IP: ip()
+  MERLIN_IP: any(ip(), hostname())
   # The IP port for the command socket
   COMMAND_IPPORT: int(min=1, max=65535, default=6341)
   # The IP port for the data socket
