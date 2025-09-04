@@ -1,0 +1,21 @@
+---
+
+type: enum("admythen")
+environment:
+  ENGINEER: str()
+  PREFIX: str()
+  MYTHEN_IP: any(ip(), hostname())
+  MYTHEN_IP_PORT: int(min=1, max=65535)
+  XSIZE: int(min=1, required=false)
+  PORT: str()
+  IP_PORT: str()
+
+  # Optional overrides
+  QSIZE: int(min=1, required=false)
+  # Mythen has no Y-size, but keep for compatibility
+  YSIZE: enum(1, required=false)
+  NCHANS: int(min=1, required=false)
+  CBUFFS: int(min=1, required=false)
+  MAX_THREADS: int(min=1, required=false)
+  EPICS_DB_INCLUDE_PATH: str(required=false)
+  NELEMENTS: int(min=1, required=false)
