@@ -56,7 +56,7 @@
 - name: Copy autosave req file
   ansible.builtin.copy:
     src: "files/auto_settings.req"
-    dest: "{{ deploy_ioc_ioc_directory }}//autosave/req/auto_settings.req"
+    dest: "{{ [deploy_ioc_ioc_directory, 'autosave', 'req', 'auto_settings.req'] | path }}"
     owner: "{{ host_info_softioc_user }}"
     group: "{{ host_info_softioc_group }}"
     mode: "0664"
