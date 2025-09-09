@@ -1,7 +1,7 @@
 
 errlogInit(20000)
 
-dbLoadDatabase("{{ _ioc_template_root_path }}/dbd/andor3App.dbd")
+dbLoadDatabase("{{ deploy_ioc_required_module_path }}/iocs/andor3IOC/dbd/andor3App.dbd")
 andor3App_registerRecordDeviceDriver(pdbbase)
 
 andor3Config("$(PORT)", 0, 0, 0, 0, 0, 1000)

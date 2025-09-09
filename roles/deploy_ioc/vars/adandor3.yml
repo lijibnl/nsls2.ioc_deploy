@@ -8,7 +8,6 @@ deploy_ioc_req_file_list:
   - name: auto_settings.req
     macros: "P=$(PREFIX)"
 deploy_ioc_device_specific_env:
-  ADANDOR3: "/epics/modules/ADAndor3"
   PORT: "ANDOR"
   XSIZE: 2048
   YSIZE: 2048
