@@ -7,7 +7,7 @@ cd $(TOP)
 
 # Make sure our clean cycle is set to 0
 dbpf $(PREFIX)cam1:CleanCycleHeight 0
-dbpf XF:08IDB-ES{Det:PICAM1}cam1:CleanCycleHeight 0
+dbpf $(PREFIX)cam1:CleanCycleHeight 0
 
 dbl > /tmp/{{ ioc_name }}-records.dbl
 date
