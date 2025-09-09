@@ -29,22 +29,6 @@
     mode: "0664"
   with_fileglob: "files/*.cmd"
 
-- name: Copy st.cmd
-  ansible.builtin.template:
-    src: "templates/st.cmd.j2"
-    dest: "{{ deploy_ioc_ioc_directory }}/iocBoot/st.cmd"
-    owner: "{{ host_info_softioc_user }}"
-    group: "{{ host_info_softioc_group }}"
-    mode: "0775"
-
-- name: Copy st_start.cmd
-  ansible.builtin.template:
-    src: "templates/st_start.cmd.j2"
-    dest: "{{ deploy_ioc_ioc_directory }}/iocBoot/st_start.cmd"
-    owner: "{{ host_info_softioc_user }}"
-    group: "{{ host_info_softioc_group }}"
-    mode: "0664"
-
 - name: Copy base.cmd
   ansible.builtin.template:
     src: "templates/base.cmd.j2"
@@ -56,15 +40,8 @@
 - name: Copy autosave req file
   ansible.builtin.template:
     src: "templates/auto_settings.req.j2"
-    dest: "{{ [deploy_ioc_ioc_directory, 'autosave', 'req', 'auto_settings.req'] | path }}"
-    owner: "{{ host_info_softioc_user }}"
-    group: "{{ host_info_softioc_group }}"
-    mode: "0664"
-
-- name: Copy postInit.cmd
-  ansible.builtin.template:
-    src: "templates/postInit.cmd.j2"
-    dest: "{{ deploy_ioc_ioc_directory }}/iocBoot/postInit.cmd"
+    dest: "{{ [deploy_ioc_ioc_directory, 'autosave', 'req', 'auto_settings.req']
+          | path }}"
     owner: "{{ host_info_softioc_user }}"
     group: "{{ host_info_softioc_group }}"
     mode: "0664"

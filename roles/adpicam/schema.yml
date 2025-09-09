@@ -4,3 +4,12 @@ type: enum("adpicam")
 environment:
   ENGINEER: str()
   PREFIX: str()
+  XSIZE: 2048
+  YSIZE: 2048
+
+  NCHANS: 2048
+  QSIZE: 2048
+
+  # The maximum number of frames buffered in the NDPluginCircularBuff plugin
+  CBUFFS: 8192
+  NELEMENTS: 10000000000
