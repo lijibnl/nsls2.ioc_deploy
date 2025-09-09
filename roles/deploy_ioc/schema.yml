@@ -1,6 +1,7 @@
 ---
 type: ioc_type()
 environment: map(any(str(), int(), num()), key=str())
+simulation: bool(default=False, required=False)
 substitutions: map(any(list(include("substitution")), include("template")), key=str(), required=False) # yamllint disable-line rule:line-length
 executable: str(required=False)
 required_module: str(required=False)

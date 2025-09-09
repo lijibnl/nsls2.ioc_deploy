@@ -72,6 +72,11 @@
         - postInit.cmd
         - st.cmd
 
+    - name: Add execute permissions to st.cmd
+      ansible.builtin.file:
+        path: "{{ deploy_ioc_ioc_directory }}/iocBoot/st.cmd"
+        mode: "0775"
+
     - name: Install top level IOC startup script
       ansible.builtin.template:
         src: templates/st_top.cmd.j2
