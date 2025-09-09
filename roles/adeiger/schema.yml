@@ -12,7 +12,7 @@ adeiger_local_intf_ip: any(ip(), hostname(), required=False)
 environment:
   ENGINEER: str()
   PREFIX: str()
-  EIGERIP: any(ip(), hostname())
+  EIGER_IP: any(ip(), hostname())
   STREAMIP: any(ip(), hostname(), required=False)
   ADEIGER: str()
 
