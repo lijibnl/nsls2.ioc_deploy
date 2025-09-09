@@ -13,7 +13,7 @@ adeiger-01:
   environment:
     ENGINEER: C. Engineer
     PREFIX: XF:31ID1-ES{ADEIGER:01}
-    EIGERIP: "10.69.57.71"
+    EIGER_IP: "10.69.57.71"
     ADEIGER: "/epics/modules/ADEiger_R3_4"
 
     XSIZE: 1030
