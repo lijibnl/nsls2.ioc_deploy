@@ -14,7 +14,6 @@ environment:
   PREFIX: str()
   EIGER_IP: any(ip(), hostname())
   STREAMIP: any(ip(), hostname(), required=False)
-  ADEIGER: str()
 
   XSIZE: int()
   YSIZE: int()
