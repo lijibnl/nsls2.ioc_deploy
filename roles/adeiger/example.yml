@@ -14,7 +14,6 @@ adeiger-01:
     ENGINEER: C. Engineer
     PREFIX: XF:31ID1-ES{ADEIGER:01}
     EIGER_IP: "10.69.57.71"
-    ADEIGER: "/epics/modules/ADEiger_R3_4"
 
     XSIZE: 1030
     YSIZE: 1065
