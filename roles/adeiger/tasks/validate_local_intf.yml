@@ -57,7 +57,7 @@
       ansible.builtin.command:
         "cat /sys/class/net/{{ _local_intf }}/speed"
       register: link_speed
-      changed_when: true
+      changed_when: false
 
     - name: Adjust MTU if necessary
       ansible.builtin.set_fact:
