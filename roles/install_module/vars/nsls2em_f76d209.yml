@@ -1,7 +1,7 @@
 ---
-nsls2em_801ec53:
+nsls2em_f76d209:
   name: nsls2em
-  version: 801ec53
+  version: f76d209
   url: https://github.com/NSLS2/nsls2em-ioc
   include_base_ad_config: true
   module_deps:

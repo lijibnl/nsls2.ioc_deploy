@@ -125,7 +125,7 @@
     state: present
 
 - name: Compile the module
-  ansible.builtin.command: "{{ install_module_compilation_command }}"
+  ansible.builtin.shell: "{{ install_module_compilation_command }}"
   register: install_module_compile_result
   args:
     chdir: "{{ install_module_dir }}"
