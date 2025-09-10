@@ -6,6 +6,10 @@ makeAutosaveFiles()
 create_monitor_set("info_settings.req", 30, "")
 create_monitor_set("info_positions.req", 10, "")
 
+# Load calibration for the device (based on the serial number)
+< $(NSLS2EM)/calibration/$(DEVICE_SN).cmd
+epicsThreadSleep(1)
+
 {% endif %}
 {% for reqfile in deploy_ioc_req_file_list %}
 create_monitor_set("{{ reqfile.name }}", 30, "{{ reqfile.macros }}")

@@ -99,5 +99,5 @@
 - name: Merge any ioc specific dbpf entries
   ansible.builtin.set_fact:
     deploy_ioc_dbpf_list:
-      "{{ deploy_ioc_dbpf_list | combine(ioc.dbpf) }}"
+      "{{ deploy_ioc_dbpf_list + ioc.dbpf }}"
   when: ioc.dbpf is defined

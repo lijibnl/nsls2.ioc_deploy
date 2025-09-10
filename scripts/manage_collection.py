@@ -127,6 +127,12 @@ def update_module():
         ]
     )
 
+    delete_old_module_config = questionary.confirm(
+        f"Delete old module config file {old_module_name_ver}.yml?", default=True
+    ).unsafe_ask()
+    if delete_old_module_config:
+        os.remove(old_module_config_path)
+
 
 def delete_module():
     module = questionary.select(
