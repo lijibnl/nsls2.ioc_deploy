@@ -26,3 +26,4 @@ req_file:
 dbpf:
   pv: str()
   value: any(int(), num(), str())
+  sleep: num(required=False)

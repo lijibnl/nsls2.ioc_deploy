@@ -1,0 +1,9 @@
+---
+nsls2em_801ec53:
+  name: nsls2em
+  version: 801ec53
+  url: https://github.com/NSLS2/nsls2em-ioc
+  include_base_ad_config: true
+  module_deps:
+    - pscdrv_1ed650d
+    - quadem_f5ab1e9
