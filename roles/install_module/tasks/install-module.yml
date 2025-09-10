@@ -31,8 +31,8 @@
     - name: Stash any local changes if module already cloned
       ansible.builtin.command:
         "git -C {{ install_module_dir }} stash" # noqa command-instead-of-module
-      register: stash_result
-      changed_when: stash_result.rc == 0
+      register: install_module_stash_result
+      changed_when: install_module_stash_result.rc == 0
       when: install_module_cloned.stat.exists
 
     - name: Clone module repository and checkout the correct version
