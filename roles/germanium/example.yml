@@ -19,3 +19,4 @@ germanium-01:
         pattern: ["PriSys=$(SYS)", "PSC=$(DEV)"]
         instances: [["XF:27ID1-ES", "GeRM-Det:1"]]
 
+
