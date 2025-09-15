@@ -1,2 +1,8 @@
 ---
-# Tasks for adaxis role
+- name: Install base startup script
+  ansible.builtin.template:
+    src: "templates/base.cmd.j2"
+    dest: "{{ iocs_directory }}/{{ ioc_name }}/iocBoot/base.cmd"
+    owner: "{{ softioc_user }}"
+    group: "{{ softioc_group }}"
+    mode: "0664"

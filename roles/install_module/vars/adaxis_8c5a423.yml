@@ -1,0 +1,8 @@
+---
+adaxis_8c5a423:
+  name: adaxis
+  url: https://github.com/areaDetector/ADAxis
+  include_base_ad_config: true
+  version: 8c5a423
+  module_deps:
+    - adcore_60080dc
