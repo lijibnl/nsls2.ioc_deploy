@@ -1,0 +1,5 @@
+---
+type: enum("adaxis")
+environment:
+  ENGINEER: str()
+  PREFIX: str()
