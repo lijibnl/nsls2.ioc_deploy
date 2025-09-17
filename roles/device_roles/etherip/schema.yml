@@ -1,0 +1,6 @@
+---
+
+type: enum("etherip")
+environment:
+  ENGINEER: str()
+  PREFIX: str()

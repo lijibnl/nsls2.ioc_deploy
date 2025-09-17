@@ -1,0 +1,7 @@
+---
+
+etherip-01:
+  type: etherip
+  environment:
+    ENGINEER: C. Engineer
+    PREFIX: XF:31ID1-ES{ETHERIP:01}
