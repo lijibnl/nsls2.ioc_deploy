@@ -3,10 +3,6 @@ dbLoadDatabase("{{ deploy_ioc_template_root_path }}/dbd/{{ deploy_ioc_executable
 {{ deploy_ioc_executable }}_registerRecordDeviceDriver(pdbbase)
 
 # etherip specific commands
-
-dbLoadDatabase("$(EPICS_BASE)/dbd/eipIoc.dbd",0,0)
-eipIoc_registerRecordDeviceDriver(pdbbase)
-
 ## Load PLC driver
 EIP_buffer_limit(492)
 drvEtherIP_init()
