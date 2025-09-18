@@ -71,7 +71,9 @@ def add_module():
         file.write("---\n\n")
         file.write(f"{module_name_ver}:\n")
         for key, value in module_config[module_name_ver].items():
-            if key != "module_deps" and not (key == "include_base_ad_config" and not value):
+            if key != "module_deps" and not (
+                key == "include_base_ad_config" and not value
+            ):
                 file.write(f"  {key}: {value}\n")
             elif key == "module_deps" and len(value) > 0:
                 file.write(f"  {key}:\n")
@@ -152,7 +154,7 @@ def update_module():
 
 
 def delete_module():
-    """Interactively delete a module config file if not required by other modules or IOC types.
+    """Interactively delete a module config if not required by other modules or roles.
     Raises RuntimeError if dependencies exist.
     """
     module = questionary.select(
@@ -186,7 +188,7 @@ def delete_module():
 
 def add_role():
     """Interactively add a new IOC role and its configuration files.
-    Prompts user for role details, creates config, example, schema, README, and template files.
+    Creates role config, example, schema, README, and template files.
     """
     role_name = questionary.text(
         "Enter the name of the new role (e.g., 'sr570'):",
