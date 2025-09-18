@@ -10,6 +10,7 @@ import yaml
 
 
 def get_module_list():
+    """Return a list of module names from the install_module vars directory."""
     return [
         os.path.splitext(f)[0]
         for f in os.listdir(os.path.join("roles", "install_module", "vars"))
@@ -17,6 +18,7 @@ def get_module_list():
 
 
 def get_role_list():
+    """Return a list of role names from the deploy_ioc vars directory."""
     return [
         os.path.splitext(f)[0]
         for f in os.listdir(os.path.join("roles", "deploy_ioc", "vars"))
@@ -24,6 +26,10 @@ def get_role_list():
 
 
 def add_module():
+    """Interactively add a new module configuration file to install_module vars.
+    Prompts user for module details and writes a new YAML config file.
+    Returns the new module name-version string.
+    """
     module_name = questionary.text(
         "Enter the name of the new module (e.g., 'ADKinetix'):",
     ).unsafe_ask()
@@ -76,6 +82,9 @@ def add_module():
 
 
 def update_module():
+    """Interactively update an existing module's version and update all references.
+    Prompts user for new version, updates config, and optionally deletes old config.
+    """
     module = questionary.select(
         "Select a module to update:", choices=get_module_list()
     ).unsafe_ask()
@@ -143,6 +152,9 @@ def update_module():
 
 
 def delete_module():
+    """Interactively delete a module config file if not required by other modules or IOC types.
+    Raises RuntimeError if dependencies exist.
+    """
     module = questionary.select(
         "Select a module to update:", choices=get_module_list()
     ).unsafe_ask()
@@ -173,6 +185,9 @@ def delete_module():
 
 
 def add_role():
+    """Interactively add a new IOC role and its configuration files.
+    Prompts user for role details, creates config, example, schema, README, and template files.
+    """
     role_name = questionary.text(
         "Enter the name of the new role (e.g., 'sr570'):",
     ).unsafe_ask()
@@ -283,10 +298,12 @@ def add_role():
 
 
 def update_role():
+    """Roles cannot be updated. Raises NotImplementedError."""
     raise NotImplementedError("Roles cannot be updated.")
 
 
 def delete_role():
+    """Interactively delete a role and its configuration files."""
     role = questionary.select(
         "Select a role to delete:", choices=get_role_list()
     ).unsafe_ask()
@@ -301,10 +318,14 @@ def delete_role():
 
 
 def report():
+    """Placeholder for future reporting functionality."""
     pass
 
 
 if __name__ == "__main__":
+    """Main entry point for manage_collection.py.
+    Handles CLI arguments and dispatches to the appropriate function.
+    """
     if len(sys.argv) not in [2, 3]:
         print("Usage: manage_collection.py <action> [target]")
         print("Actions: add, delete, update, report")
