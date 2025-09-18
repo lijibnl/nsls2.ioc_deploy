@@ -325,9 +325,6 @@ def report():
 
 
 if __name__ == "__main__":
-    """Main entry point for manage_collection.py.
-    Handles CLI arguments and dispatches to the appropriate function.
-    """
     if len(sys.argv) not in [2, 3]:
         print("Usage: manage_collection.py <action> [target]")
         print("Actions: add, delete, update, report")
