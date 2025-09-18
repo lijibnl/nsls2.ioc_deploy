@@ -33,7 +33,7 @@ def add_module():
     ).unsafe_ask()
 
     url = questionary.text(
-        "Enter the git URL for the module (e.g. https://github.com/areaDetector/ADKinetix):",
+        "Enter the git URL for the module (e.g. https://github.com/NSLS2/ADKinetix):",
     ).unsafe_ask()
 
     is_ad = questionary.confirm(
@@ -62,7 +62,15 @@ def add_module():
     )
 
     with open(module_config_path, "w") as file:
-        yaml.safe_dump(module_config, file, default_flow_style=False, sort_keys=False)
+        file.write("---\n\n")
+        file.write(f"{module_name_ver}:\n")
+        for key, value in module_config[module_name_ver].items():
+            if key != "module_deps" and not (key == "include_base_ad_config" and not value):
+                file.write(f"  {key}: {value}\n")
+            elif key == "module_deps" and len(value) > 0:
+                file.write(f"  {key}:\n")
+                for dep in value:
+                    file.write(f"    - {dep}\n")
 
     return module_name_ver
 
@@ -212,7 +220,8 @@ def add_role():
         ).unsafe_ask()
         ioc_type_config["deploy_ioc_executable"] = executable
 
-    with open(role_var_file_path, "w") as file:
+    with open(role_var_file_path, "a") as file:
+        file.write("---\n\n")
         yaml.safe_dump(ioc_type_config, file, default_flow_style=False, sort_keys=False)
 
     if not standard_st_cmd:
@@ -223,7 +232,8 @@ def add_role():
     for subdir in ["templates", "tasks"]:
         os.makedirs(os.path.join(role_path, subdir), exist_ok=True)
 
-    with open(os.path.join(role_path, "example.yml"), "w") as file:
+    with open(os.path.join(role_path, "example.yml"), "a") as file:
+        file.write("---\n\n")
         example_config = {
             f"{role_name_actual}-01": {
                 "type": role_name_actual,
@@ -234,7 +244,9 @@ def add_role():
             }
         }
         yaml.safe_dump(example_config, file, default_flow_style=False, sort_keys=False)
-    with open(os.path.join(role_path, "schema.yml"), "w") as file:
+
+    with open(os.path.join(role_path, "schema.yml"), "a") as file:
+        file.write("---\n\n")
         schema_config = {
             "type": f'enum("{role_name_actual}")',
             "environment": {
@@ -250,6 +262,15 @@ def add_role():
 
     with open(os.path.join(role_path, "tasks", "main.yml"), "w") as file:
         file.write(f"---\n# Tasks for {role_name} role\n")
+        file.write("""
+- name: Install base.cmd
+  ansible.builtin.template:
+    src: templates/base.cmd.j2
+    dest: "{{ deploy_ioc_ioc_directory }}/iocBoot/base.cmd"
+    mode: "0664"
+    owner: "{{ host_config.softioc_user }}"
+    group: "{{ host_config.softioc_group }}"
+""")
 
     with open(os.path.join(role_path, "templates", "base.cmd.j2"), "w") as file:
         file.write(
