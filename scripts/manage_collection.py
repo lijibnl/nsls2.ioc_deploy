@@ -237,7 +237,7 @@ def add_role():
         ).unsafe_ask()
         ioc_type_config["deploy_ioc_executable"] = executable
 
-    with open(role_var_file_path, "a") as file:
+    with open(role_var_file_path, "w") as file:
         file.write("---\n\n")
         yaml.safe_dump(ioc_type_config, file, default_flow_style=False, sort_keys=False)
 
@@ -249,7 +249,7 @@ def add_role():
     for subdir in ["templates", "tasks"]:
         os.makedirs(os.path.join(role_path, subdir), exist_ok=True)
 
-    with open(os.path.join(role_path, "example.yml"), "a") as file:
+    with open(os.path.join(role_path, "example.yml"), "w") as file:
         file.write("---\n\n")
         example_config = {
             f"{role_name_actual}-01": {
@@ -262,7 +262,7 @@ def add_role():
         }
         yaml.safe_dump(example_config, file, default_flow_style=False, sort_keys=False)
 
-    with open(os.path.join(role_path, "schema.yml"), "a") as file:
+    with open(os.path.join(role_path, "schema.yml"), "w") as file:
         file.write("---\n\n")
         schema_config = {
             "type": f'enum("{role_name_actual}")',
