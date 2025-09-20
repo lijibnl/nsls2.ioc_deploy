@@ -1,0 +1,7 @@
+adgermanium_0395fac:
+  name: ADGermanium
+  version: 0395fac
+  url: https://github.com/lijibnl/ADGermanium
+  include_base_ad_config: true
+  module_deps:
+    - adcore_60080dc

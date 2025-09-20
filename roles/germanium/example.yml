@@ -1,21 +1,7 @@
----
 germanium-01:
   type: germanium
   environment:
-    ENGINEER: "C. Engineer"
-    PREFIX: "XF:27ID1-ES{GeRM-Det:1}"
-    SYS: "XF:27ID1-ES"
-    DEV: "GeRM-Det:1"
-    PORT: "GERM1"
-    IP: "10.66.211.63"
-    DEVICE_IP: "10.66.211.63"
-  substitutions:
-    germanium:
-      - filepath: "germanium.template"
-        pattern: ["P=$(SYS)", "R={$(DEV)}", "PORT=$(PORT)", "ADDR=0", "TIMEOUT=1"]
-        instances: [["XF:27ID1-ES", "GeRM-Det:1", "GERM1", "0", "1"]]
-    germanium_pscdrv:
-      - filepath: "germanium_pscdrv.template"
-        pattern: ["PriSys=$(SYS)", "PSC=$(DEV)"]
-        instances: [["XF:27ID1-ES", "GeRM-Det:1"]]
-
+    ENGINEER: C. Engineer
+    PREFIX: XF:31ID1-ES{GERMANIUM:01}
+    NELM: "384"
+    DETECTOR_IP: "172.16.0.211"

@@ -1,0 +1,12 @@
+# Create standard arrays plugins for all data types
+NDStdArraysConfigure("$(MCA_PORT)", $(QSIZE), 0, "$(DETECTOR_PORT)", $(MCA_ADDR), 0, 0, 0, 0, 0)
+dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P=$(PREFIX), R=MCA:, PORT=$(MCA_PORT), ADDR=0, TIMEOUT=1, NDARRAY_PORT=$(DETECTOR_PORT), TYPE=Int32, FTVL=LONG, NELEMENTS=$(MCA_XSIZE)")
+
+NDStdArraysConfigure("$(TDC_PORT)", $(QSIZE), 0, "$(DETECTOR_PORT)", $(TDC_ADDR), 0, 0, 0, 0, 0)
+dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P=$(PREFIX), R=TDC:, PORT=$(TDC_PORT), ADDR=0, TIMEOUT=1, NDARRAY_PORT=$(DETECTOR_PORT), TYPE=Int32, FTVL=LONG, NELEMENTS=$(TDC_XSIZE)")
+
+NDStdArraysConfigure("$(SPCT_PORT)", $(QSIZE), 0, "$(DETECTOR_PORT)", $(SPCT_ADDR), 0, 0, 0, 0, 0)
+dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P=$(PREFIX), R=SPCT:, PORT=$(SPCT_PORT), ADDR=0, TIMEOUT=1, NDARRAY_PORT=$(DETECTOR_PORT), TYPE=Int32, FTVL=LONG, NELEMENTS=$(SPCT_XSIZE)")
+
+NDStdArraysConfigure("$(INTENS_PORT)", $(QSIZE), 0, "$(DETECTOR_PORT)", $(INTENS_ADDR), 0, 0, 0, 0, 0)
+dbLoadRecords("$(ADCORE)/db/NDStdArrays.template", "P=$(PREFIX), R=INTENS:, PORT=$(INTENS_PORT), ADDR=0, TIMEOUT=1, NDARRAY_PORT=$(DETECTOR_PORT), TYPE=Float64, FTVL=DOUBLE, NELEMENTS=$(INTENS_XSIZE)")

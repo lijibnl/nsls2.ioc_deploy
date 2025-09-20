@@ -1,0 +1,36 @@
+< envPaths
+
+# Beamline-specific environment variables
+epicsEnvSet("PREFIX", "{{ environment.PREFIX }}")
+epicsEnvSet("NELM", "{{ environment.NELM }}")
+epicsEnvSet("Detector_IP", "{{ environment.DETECTOR_IP }}")
+
+# Port definitions
+epicsEnvSet("QSIZE", "20")
+epicsEnvSet("DETECTOR_PORT", "GERM")
+epicsEnvSet("MCA_PORT", "ARR_MCA")
+epicsEnvSet("TDC_PORT", "ARR_TDC")
+epicsEnvSet("SPCT_PORT", "ARR_SPCT")
+epicsEnvSet("INTENS_PORT", "ARR_INTENS")
+
+# Address definitions
+epicsEnvSet("DETECTOR_ADDR", "0")
+epicsEnvSet("MCA_ADDR", "1")
+epicsEnvSet("TDC_ADDR", "2")
+epicsEnvSet("SPCT_ADDR", "3")
+epicsEnvSet("INTENS_ADDR", "4")
+
+# Array size definitions
+epicsEnvSet("MCA_XSIZE", "4096")
+epicsEnvSet("MCA_YSIZE", "$(NELM)")
+epicsEnvSet("TDC_XSIZE", "1024")
+epicsEnvSet("TDC_YSIZE", "$(NELM)")
+epicsEnvSet("SPCT_XSIZE", "$(MCA_XSIZE)")
+epicsEnvSet("INTENS_XSIZE", "$(NELM)")
+
+# Plugin configuration
+epicsEnvSet("NCHANS", "2048")
+epicsEnvSet("CBUFFS", "500")
+epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
+
+echo "NELM=$(NELM)"

@@ -1,17 +1,6 @@
----
 type: enum("germanium")
 environment:
   ENGINEER: str()
   PREFIX: str()
-  SYS: str()
-  DEV: str()
-  PORT: str()
-  IP: str()
-  RING_SIZE: str()
-  DEVICE_IP: str()
-  DEVICE_SN: str()
-substitutions: map(any(list(include("substitution")), include("template")), key=str(), required=False)
-executable: str(required=False)
-required_module: str(required=False)
-dbpf: map(str(), str(), required=False)
-
+  NELM: str()
+  DETECTOR_IP: str()
