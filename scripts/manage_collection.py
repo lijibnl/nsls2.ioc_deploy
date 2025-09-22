@@ -326,9 +326,10 @@ def report():
     print("\nDeployable modules:\n")
     modules = {}
     for module in get_module_list():
-        if module.rsplit("_", 1)[0] not in modules:
-            modules[module.rsplit("_", 1)[0]] = []
-        modules[module.rsplit("_", 1)[0]].append(module.rsplit("_", 1)[1])
+        module_name, ver = tuple(module.rsplit("_", 1))
+        if module_name not in modules:
+            modules[module_name] = []
+        modules[module_name].append(ver)
 
     print(
         tabulate.tabulate(
