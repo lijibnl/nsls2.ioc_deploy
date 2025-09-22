@@ -32,26 +32,6 @@ jobs:
           VALIDATE_PROTOBUF: false # Conflicts with EPICS proto files
           VALIDATE_PYTHON_BLACK: false # Conflicts with ruff
 
-  get_changed_files:
-    name: Get Changed YAML Files
-    runs-on: ubuntu-latest
-    outputs:
-      any_changed: ${{ steps.changed-files.outputs.any_changed }}
-      all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Get Changed Files
-        id: changed-files
-        uses: step-security/changed-files@3dbe17c78367e7d60f00d78ae6781a35be47b4a1 # yamllint disable-line rule:line-length
-        with:
-          files: |
-            **/*.{yml,yaml}
-
   run_pre_commit:
     name: Run Pre-Commit Hooks
     runs-on: ubuntu-latest
@@ -64,7 +44,7 @@ jobs:
       - name: Setup Pixi
         uses: prefix-dev/setup-pixi@8ca4608ef7f4daeb54f5205b20d0b7cb42f11143  # yamllint disable-line rule:line-length
         with:
-          pixi-version: v0.42.1
+          pixi-version: v0.55.0
           cache: false
           frozen: true
 
