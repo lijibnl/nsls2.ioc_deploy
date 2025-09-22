@@ -16,7 +16,7 @@ report = "make report"
 lint-changes = "pre-commit"
 lint-all = "pre-commit run --all-files"
 ruff-fix = "ruff check --fix"
-tests = "pytest"
+validate = "pytest"
 
 [build-dependencies]
 make = "*"
